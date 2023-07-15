@@ -55,31 +55,26 @@ const onMouseLeave = () => {
 };
 
 const buttonColor = computed(() => {
+    let color = {
+        text: props.textColor ?? (props.light ? 'primary' : 'white'),
+        background: props.color ?? (props.light ? 'primary-light' : 'primary')
+    };
+
     if(props.disabled) {
-        return 'gray-light';
+        color.text = 'placeholder';
+        color.background = 'gray-light';
     } else if(isMouseOver.value || props.active) {
-        return props.light ? 'primary-light-2' : 'primary-dark';
-    } else if(props.color) {
-        return props.color;
-    } else {
-        return props.light ? 'primary-light' : 'primary';
+        color.text = props.light ? 'primary-dark' : 'white';
+        color.background = props.light ? 'primary-light-2' : 'primary-dark'
     }
+
+    return color;
 });
-const buttonTextColor = computed(() => {
-    if(props.disabled) {
-        return 'placeholder';
-    } else if(isMouseOver.value || props.active) {
-        return props.light ? 'primary-dark' : 'white';
-    } else if(props.textColor) {
-        return props.textColor;
-    } else {
-        return props.light ? 'primary' : 'white';
-    }
-});
+
 const buttonClasses = computed(() => [
     props.fill ? 'w-full' : '',
-    `bg-${ buttonColor.value }`,
-    `text-${ buttonTextColor.value }`
+    `bg-${ buttonColor.value.background }`,
+    `text-${ buttonColor.value.text }`
 ]);
 const buttonContentClasses = computed(() => [
     `place-content-${ props.contentAlign }`

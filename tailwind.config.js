@@ -3,7 +3,7 @@ export default {
   content: [],
   purge: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
   safelist: [
-    "w-full",
+    'w-full',
     {
       pattern: /(bg|text)-(\w)/
     },
@@ -23,31 +23,40 @@ export default {
   theme: {
     extend: {},
     colors: {
-      transparent: "transparent",
+      transparent: 'transparent',
       primary: {
         light: '#E7EBFC',
-        'light-2': "#DDE4FF",
-        DEFAULT: "#425EFF",
+        'light-2': '#DDE4FF',
+        DEFAULT: '#425EFF',
         dark: '#2B48F0'
       },
-      secondary: "#6A6E85",
-      warning: "#F79E1B",
-      success: "#59B72A",
-      danger: "#E54F3A",
-      placeholder: "#9DA0AF",
-      balck: "#000000",
-      white: "#FFFFFF",
-      dark: "#232323",
+      secondary: '#6A6E85',
+      warning: {
+        light: '#FDECD1',
+        DEFAULT: '#F79E1B'
+      },
+      success: { 
+        light: '#59B72A33',
+        DEFAULT: '#59B72A'
+      },
+      danger: {
+        light: '#FADFDC',
+        DEFAULT: '#E54F3A'
+      },
+      placeholder: '#9DA0AF',
+      balck: '#000000',
+      white: '#FFFFFF',
+      dark: '#232323',
       blue: {
         light: '#FAFBFF',
         DEFAULT: '#1fb6ff',
         dark: '#009eeb',
       },
       gray: {
-        light: "#E6E6E6"
+        light: '#E6E6E6',
+        DEFAULT: '#E1E2E7'
       }
     }
   },
   plugins: [],
 }
-

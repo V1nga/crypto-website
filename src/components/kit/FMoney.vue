@@ -29,16 +29,16 @@ const props = defineProps({
     },
     textSize: {
         type: String,
-        default: "4xl"
+        default: '4xl'
     },
     slugTextSize: {
         type: String,
-        default: "xl"
+        default: 'xl'
     }
 });
 
 const sum = computed(() => {
-    return new Intl.NumberFormat("en-US", { minimumFractionDigits: 2 }).format(props.number);
+    return new Intl.NumberFormat('en-US', { minimumFractionDigits: 2 }).format(props.number);
 });
 
 </script>

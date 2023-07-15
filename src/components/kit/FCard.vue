@@ -1,5 +1,5 @@
 <template>
-    <div class="filter drop-shadow-xl p-4" :class="cardClasses">
+    <div class="filter drop-shadow-xl" :class="cardClasses">
         <slot/>
     </div>
 </template>
@@ -9,16 +9,20 @@ import { computed } from 'vue';
 const props = defineProps({
     color: {
         type: String,
-        default: "white"
+        default: 'white'
     },
     rounded: {
         type: String,
-        default: "lg"
+        default: 'lg'
+    },
+    noPaddings: {
+        type: Boolean
     }
 });
 
 const cardClasses = computed(() => [
     `bg-${ props.color }`,
-    `rounded-${ props.rounded}`
+    `rounded-${ props.rounded}`,
+    props.noPaddings ? '' : 'p-4'
 ]);
 </script>

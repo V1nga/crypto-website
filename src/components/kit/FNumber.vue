@@ -12,6 +12,6 @@ const props = defineProps({
 });
 
 const sum = computed(() => {
-    return new Intl.NumberFormat("en-US").format(props.number);
+    return new Intl.NumberFormat('en-US').format(props.number);
 });
 </script>
