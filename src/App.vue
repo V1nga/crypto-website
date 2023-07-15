@@ -1,8 +1,8 @@
 <template>
-  <div class="flex h-screen bg-blue-light">
+  <div class="flex h-full bg-blue-light">
     <Navigation/>
-
-    <div class="p-6 2xl:p-10 h-screen w-full">
+    
+    <div class="p-6 2xl:p-10 h-full w-full">
       <HomePage/>
     </div>
   </div>
