@@ -24,6 +24,7 @@ export default {
     extend: {},
     colors: {
       transparent: 'transparent',
+      active: '#F3F5FD',
       primary: {
         light: '#E7EBFC',
         'light-2': '#DDE4FF',

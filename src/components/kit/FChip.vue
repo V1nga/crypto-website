@@ -1,5 +1,5 @@
 <template>
-    <div :class="chipClasses" class="px-2 rounded-md font-bold text-sm w-min">
+    <div :class="chipClasses" class="px-2 rounded-md font-bold text-sm w-min whitespace-nowrap">
         <slot/>
     </div>
 </template>
@@ -18,6 +18,9 @@ const props = defineProps({
     },
     secondary: {
         type: Boolean
+    },
+    primary: {
+        type: Boolean
     }
 });
 
@@ -33,6 +36,9 @@ const chipColor = computed(() => {
     } else if(props.warning) {
         color.text = 'warning';
         color.background = 'warning-light';
+    } else if (props.primary) {
+        color.text = 'primary';
+        color.background = 'primary-light';
     }
 
     return color;

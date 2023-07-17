@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <FPage>
     <div class="grid xl:grid-cols-4 xl:gap-4 2xl:gap-8 grid-cols-1">
       <FCard class="p-8 mb-6 xl:mb-0">
         <div class="font-semibold text-dark mb-3">Общий баланс</div>
@@ -75,9 +75,10 @@
         </div>
       </FCard>
     </div>
-  </div>
+  </FPage>
 </template>
 <script setup>
+import FPage from '../../components/kit/FPage.vue';
 import FCard from '../../components/kit/FCard.vue';
 import FCardTitle from '../../components/kit/FCardTitle.vue';
 import FButton from '../../components/kit/FButton.vue';
