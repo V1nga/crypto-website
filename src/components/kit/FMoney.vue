@@ -1,5 +1,5 @@
 <template>
-    <div class="font-semibold" :class="`text-${ color }`">
+    <div :class="`text-${ color } font-${ fontWeight }`">
         <span :class="`text-${ textSize }`">
             <slot>{{ sum?.toString().split(".")[0] }}</slot>
         </span>
@@ -15,7 +15,7 @@
 import { computed } from 'vue';
 
 const props = defineProps({
-    number: {
+    money: {
         type: Number,
         required: true
     },
@@ -34,11 +34,15 @@ const props = defineProps({
     slugTextSize: {
         type: String,
         default: 'xl'
+    },
+    fontWeight: {
+        type: String,
+        default: 'semibold'
     }
 });
 
 const sum = computed(() => {
-    return new Intl.NumberFormat('en-US', { minimumFractionDigits: 2 }).format(props.number);
+    return new Intl.NumberFormat('en-US', { minimumFractionDigits: 2 }).format(props.money);
 });
 
 </script>

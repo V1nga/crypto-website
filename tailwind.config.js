@@ -42,7 +42,8 @@ export default {
       },
       danger: {
         light: '#FADFDC',
-        DEFAULT: '#E54F3A'
+        DEFAULT: '#E54F3A',
+        dark: '#C64433'
       },
       placeholder: '#9DA0AF',
       balck: '#000000',

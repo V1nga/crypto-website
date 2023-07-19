@@ -3,7 +3,7 @@
     <div class="grid xl:grid-cols-4 xl:gap-4 2xl:gap-8 grid-cols-1">
       <FCard class="p-8 mb-6 xl:mb-0">
         <div class="font-semibold text-dark mb-3">Общий баланс</div>
-        <FMoney :number="12987.89" currency="USDT" class="mb-3"/>
+        <FMoney :money="12987.89" currency="USDT" class="mb-3"/>
         <div class="text-sm font-semibold text-secondary mb-9">$345,678.00</div>
         <div class="absolute inset-x-0 bottom-0 p-6">
           <FButton light fill>Вывод средств</FButton>
@@ -35,13 +35,13 @@
 
           <div>
             <div class="font-semibold text-dark mb-2">Мин. сумма за сегодня</div>
-            <FMoney :number="1112987.34" currency="USDT" text-size="3xl" slug-text-siz="normal" class="mb-2"/>
+            <FMoney :money="1112987.34" currency="USDT" text-size="3xl" slug-text-siz="normal" class="mb-2"/>
             <FStonks :number="3.67" append="%"/>
           </div>
 
           <div>
             <div class="font-semibold text-dark mb-2">Макс. сумма за сегодня</div>
-            <FMoney :number="12987.34" currency="USDT" text-size="3xl" slug-text-size="normal" class="mb-2"/>
+            <FMoney :money="12987.34" currency="USDT" text-size="3xl" slug-text-size="normal" class="mb-2"/>
             <FStonks :number="-4.56" append="%"/>
           </div>
         </div>
@@ -54,7 +54,7 @@
             <template #item-requisites="{ item }">
               <div class="flex flex-nowrap">
                 {{ item.requisites }}
-                <img :src="`/icons/${ item.cardIssuer }.svg`" class="ml-2"/>
+                <FIcon :icon="item.cardIssuer" class="ml-2"/>
               </div>
             </template>
             <template #item-status="{ item }">
@@ -62,7 +62,7 @@
                 <FChip v-bind:[item.statusColor]=true>{{ item.status }}</FChip>
                 <div class="flex flex-nowrap text-secondary font-bold text-sm mt-1">
                   {{ item.statusDate }}
-                  <img src="/icons/person.svg" class="ml-2"/>
+                  <FIcon icon="person" class="ml-2"/>
                 </div>
               </div>
             </template>
@@ -88,6 +88,7 @@ import FStonks from '../../components/kit/FStonks.vue';
 import FTable from '../../components/kit/FTable.vue';
 import FChip from '../../components/kit/FChip.vue';
 import FArrowButton from '../../components/kit/FArrowButton.vue';
+import FIcon from '../../components/kit/FIcon.vue';
 
 const summaryHeaders = [
   { text: 'Клиент', field: 'client' },

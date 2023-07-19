@@ -1,7 +1,7 @@
 <template>
     <div class="flex font-semibold text-lg">
-        <img :src="`/icons/${ number > 0 ? 'stonks' : 'not-stonks' }.svg`"/>
-        
+        <FIcon :icon="number > 0 ? 'stonks' : 'not-stonks'"/>
+
         <div :class="number > 0 ? 'text-success' : 'text-danger'" class="ml-2">
             <span>
                 <slot name="prepend">
@@ -18,7 +18,9 @@
     </div>
 </template>
 <script setup>
-const props = defineProps({
+import FIcon from './FIcon.vue';
+
+defineProps({
     number: {
         type: Number
     },

@@ -26,6 +26,12 @@ const props = defineProps({
     textColor: {
         type: String
     },
+    hoverColor: {
+        type: String,
+    },
+    hoverTextColor: {
+        type: String
+    },
     light: {
         type: Boolean,
         deafult: false
@@ -64,8 +70,8 @@ const buttonColor = computed(() => {
         color.text = 'placeholder';
         color.background = 'gray-light';
     } else if(isMouseOver.value || props.active) {
-        color.text = props.light ? 'primary-dark' : 'white';
-        color.background = props.light ? 'primary-light-2' : 'primary-dark'
+        color.text = props.hoverTextColor ?? (props.light ? 'primary-dark' : 'white');
+        color.background = props.hoverColor ?? (props.light ? 'primary-light-2' : 'primary-dark');
     }
 
     return color;
@@ -80,3 +86,5 @@ const buttonContentClasses = computed(() => [
     `place-content-${ props.contentAlign }`
 ])  
 </script>
+<style scoped>
+</style>

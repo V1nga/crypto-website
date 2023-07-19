@@ -7,14 +7,18 @@
             :style="`width: ${ width }${ Number.isInteger(width) ? 'px' : '' };`"
         >
             <slot/>
+            <div class="f-dialog-footer">
+                <slot name="footer"/>
+            </div>
             <button class="f-dialog-close-btn" @click="onClickClose">
-                <img src="/icons/close.svg"/>
+                <FIcon icon="close"/>
             </button>
         </div>
     </transition>
 </template>
 <script setup>
 import { ref, computed } from 'vue';
+import FIcon from './FIcon.vue';
 import { clickOutSide as vClickOutSide } from '@mahdikhashan/vue3-click-outside'
 
 const emit = defineEmits(['update:modelValue']);
@@ -24,7 +28,7 @@ const props = defineProps({
     },
     width: {
         type: [Number, String],
-        default: 550
+        default: 580
     }
 });
 
@@ -64,5 +68,10 @@ const onClickClose = () => {
     position: absolute;
     top: 26px;
     right: 26px;
+}
+
+.f-dialog-footer {
+    position: sticky;
+    bottom: 0;
 }
 </style>

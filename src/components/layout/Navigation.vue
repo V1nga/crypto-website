@@ -16,7 +16,7 @@
                 @click="onClickNav(item)"
             >
                 <template #prepend="{ isMouseOver, isActive }">
-                    <img :src="`/icons/${ item.logo }${ isMouseOver || isActive ? '' : '-gray' }.svg`" :alt="`${ item.text }-logo`" class="pr-4">
+                    <FIcon :icon="`${ item.logo }${ isMouseOver || isActive ? '' : '-gray' }`" class="pr-4"/>
                 </template>
                 <template #default>
                     <div class="text-sm font-semibold">{{ item.text }}</div>
@@ -27,12 +27,13 @@
 </template>
 <script setup>
 import { useRouter } from 'vue-router';
+import FIcon from '../kit/FIcon.vue';
 import FButton from '../kit/FButton.vue';
 
 const navigationItems = [
     { text: 'Главная', logo: 'home', path: '/' },
     { text: 'Транзакции', logo: 'transaction', path: '/transactions'  },
-    { text: 'Вывод средств', logo: 'wallet', path: '/withdrawal-of-funds'  },
+    { text: 'Вывод средств', logo: 'wallet', path: '/withdraw-money'  },
     { text: 'Проблемные платежи', logo: 'warning', path: '/problem-payments'  },
     { text: 'Платежные решения', logo: 'noun-bulb-money', path: '/payment-solutions'  },
     { text: 'Настройки', logo: 'cog', path: '/settings'  },

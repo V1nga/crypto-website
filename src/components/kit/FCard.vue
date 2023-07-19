@@ -1,10 +1,22 @@
 <template>
-    <div class="filter drop-shadow-xl" :class="cardClasses">
+    <FSheet
+        :min-width="minWidth"
+        :min-height="minHeight"
+        :width="width"
+        :height="height"
+        :max-width="maxWidth"
+        :max-height="maxHeight"
+        
+        class="filter drop-shadow-xl"
+        :class="cardClasses"
+    >
         <slot/>
-    </div>
+    </FSheet>
 </template>
 <script setup>
 import { computed } from 'vue';
+import FSheet from './FSheet.vue';
+import MakeSizeProps from '../../props/MakeSizeProps';
 
 const props = defineProps({
     color: {
@@ -17,7 +29,8 @@ const props = defineProps({
     },
     noPaddings: {
         type: Boolean
-    }
+    },
+    ...MakeSizeProps
 });
 
 const cardClasses = computed(() => [
