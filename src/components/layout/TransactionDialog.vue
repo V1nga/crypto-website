@@ -1,11 +1,13 @@
 <template>
     <FDialog v-model="visible" class="text-dark">
         <div class="text-center py-12">
-            <slot name="header-prepend"/>
-            <slot name="header">
-                <FMoney :money="money" :currency="currency" textSize="5xl" slug-text-size="2xl"/>
+            <slot name="header-prepend" :transaction="transaction"/>
+            <slot name="header" :transaction="transaction">
+                <FMoney :money="money" :currency="currency" :color="moneyColor" textSize="5xl" slug-text-size="2xl"/>
                 <div class="flex flex-nowrap justify-center mt-4">
-                    <FChip v-bind:[statusColor]=true>{{ statusText }}</FChip>
+                    <slot name="header-status" :status-color="statusColor" :status-text="statusText">
+                        <FChip v-bind:[statusColor]=true>{{ statusText }}</FChip>
+                    </slot>
                     <div class="text-dark font-semibold ml-2">
                         <slot name="header-date" :date="statusDate">{{ statusDate }}</slot>
                     </div>
@@ -17,7 +19,7 @@
             <slot>
                 <slot name="transaction-id" :transaction="transaction">
                     <p class="text-secondary">ID транзакции</p>
-                    <p class="text-xl font-bold">{{ transactionId }}</p>
+                    <p class="text-2xl font-bold">{{ transactionId }}</p>
                 </slot>
 
                 <div class="mt-4 grid grid-cols-2 gap-y-2 text-md text-dark">
@@ -79,20 +81,25 @@ import FDialog from '../kit/FDialog.vue';
 import FMoney from '../kit/FMoney.vue';
 import FChip from '../kit/FChip.vue';
 import FCard from '../kit/FCard.vue';
+import FIcon from '../kit/FIcon.vue';
 import FTextField from '../kit/FTextField.vue';
 
 const emit = defineEmits(['update:modelValue']);
 const props = defineProps({
     money: {
-        type: Number,
+        type: [String, Number],
         required: true
     },
-    currency: {
+    moneyColor: {
         type: String,
+        default: 'primary'
+    },
+    currency: {
+        type: [String, Number],
         required: true
     },
     statusText: {
-        type: String,
+        type: [String, Number],
         required: true
     },
     statusColor: {
@@ -112,7 +119,7 @@ const props = defineProps({
         required: true
     },
     transactionId: {
-        type: Number,
+        type: [String, Number],
         required: true
     },
     comments: {

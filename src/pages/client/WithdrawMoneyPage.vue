@@ -12,10 +12,21 @@
         <template #default>
             <FCard no-paddings>
                 <FTable :headers="transactionsHeaders" :items="transactionsItems">
+                    <template #item-requisites="{ item }">
+                        <div class="flex flex-nowrap">
+                            {{ item.requisites }}
+                            <FIcon :icon="item.cardIssuer" class="ml-2"/>
+                        </div>
+                    </template>
                     <template #item-status="{ item }">
                         <div>
                             <FChip v-bind:[item.statusColor]=true>{{ item.status }}</FChip>
-                            <div class="flex flex-nowrap text-secondary font-bold text-sm mt-1">{{ item.statusDate }}</div>
+                            <div class="flex flex-nowrap text-secondary font-bold text-sm mt-1">
+                                {{ item.statusDate }}
+                                <button v-if="item.statusChanger">
+                                    <FIcon icon="person" class="ml-2"/>
+                                </button>
+                            </div>
                         </div>
                     </template>
                     <template #item-edit="{ item }">
@@ -37,10 +48,10 @@
                 :transaction-id="transactionDialogData.id"
                 :headers="[
                     { text: 'ID клиента', field: 'clientId' },
-                    { text: 'Дата / время закрытия', field: 'date' },
+                    { text: 'Дата / время закрытия', field: 'closeDate' },
                     { text: 'Дата создания', field: 'createDate' },
                     { text: 'Метод закрытия', field: 'closeMethod' },
-                    { text: 'Кем закрыто', field: 'closerLogin' },
+                    { text: 'Кем закрыто', field: 'closer' },
                     { text: 'Реквизиты', field: 'requisites' }
                 ]"
                 :comments="comments"
@@ -56,7 +67,7 @@
                 <template #header-append>
                     <div class="whitespace-nowrap">
                         <span class="font-bold text-dark mr-1">Кем изменен статус:</span>
-                        <span class="font-semibold text-primary">{{ transactionDialogData.closerLogin }}</span>
+                        <span class="font-semibold text-primary">{{ transactionDialogData.closer }}</span>
                     </div>
                 </template>
                 <template #transaction-id="{ transaction }">
@@ -68,23 +79,12 @@
                         <div class="w-full flex justify-end">
                             <FButton color="danger" hover-color="danger-dark" @click="openDisputMessageBox">Создать диспут</FButton>
                         </div>
-                        <FMessageBox v-model="disputMessageBoxVisible" title="Изменить пароль" absolute>
+                        <FMessageBox v-model="disputMessageBoxVisible" title="Создать диспут" absolute>
                             <FTextField
                                 outlined
-                                label="Текущий пароль"
-                                placeholder="Введите пароль"
+                                label="Доп. информация"
+                                placeholder="Напишите что-нибудь..."
                                 class="mb-5"
-                            />
-                            <FTextField
-                                outlined
-                                label="Новый пароль"
-                                placeholder="Введите пароль"
-                                class="mb-5"
-                            />
-                            <FTextField
-                                outlined
-                                label="Подтвердить пароль"
-                                placeholder="Введите пароль"
                             />
                         </FMessageBox>
                     </div>
@@ -128,7 +128,7 @@
 </template>
 <script setup>
 import { ref } from 'vue';
-import FPage from '../../components/kit/FPage.vue';
+import FPage from '../../components/layout/FPage.vue';
 import FMoney from '../../components/kit/FMoney.vue';
 import FCard from '../../components/kit/FCard.vue';
 import FTable from '../../components/kit/FTable.vue';
@@ -154,40 +154,20 @@ const comments = [
     { login: "email@email.com", date: "23.09.2020 23:00", status: 'Обработка', statusColor: 'warning', previousStatus: 'Созданная заявка', previousStatusColor: 'secondary', text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco Lorem ipsum dolor sit amet", attachments: [ { fileName: 'чек об оплате.jpeg', fileSize: '2.57 MB' } ] },
 ];
 const transactionsHeaders = [
-  { text: 'ID транзакции', field: 'id' },
-  { text: 'ID клиента', field: 'clientId' },
-  { text: 'Дата, время закр.', field: 'date' },
-  { text: 'Сумма платежа', field: 'sum' },
-  { text: 'Дата создания', field: 'createDate' },
+  { text: 'Способ', field: 'method' },
+  { text: 'Реквизиты', field: 'requisites' },
+  { text: 'Сумма вывода', field: 'sum' },
+  { text: 'Курс вывода', field: 'exchangeRate' },
+  { text: 'Дата созд.', field: 'createDate' },
   { text: 'Статус / Дата', field: 'status' },
   { text: '', field: 'edit' }
 ];
 const transactionsItems = [
-    { id: 34234234234, clientId: 342324234, date: '12.12.2023 23:35', closeMethod: "В ручную", closerLogin: "email@email.com", requisites: '1323 3434 3434 4567', cardIssuer: 'visa', sum: '0.123454 BTC', createDate: '12.12.2023 23:35', status: 'Успешный платеж', statusColor: 'success', statusDate: '12.12.2023 23:45' },
-    { id: 34234234234, clientId: 34234234234, date: '12.12.2023 23:35',closeMethod: "В ручную", closerLogin: "email@email.com", requisites: '1323 3434 3434 4567', cardIssuer: 'visa', sum: '0.123454 BTC', createDate: '12.12.2023 23:35', status: 'Созданная заявка', statusColor: 'secondary', statusDate: '12.12.2023 23:45' },
-    { id: 34234234234, clientId: 34234234234, date: '12.12.2023 23:35',closeMethod: "В ручную", closerLogin: "email@email.com", requisites: '1323 3434 3434 4567', cardIssuer: 'visa', sum: '0.123454 BTC', createDate: '12.12.2023 23:35', status: 'Ожидание оплаты', statusColor: 'warning', statusDate: '12.12.2023 23:45' },
-    { id: 34234234234, clientId: 34234234234, date: '12.12.2023 23:35',closeMethod: "В ручную", closerLogin: "email@email.com", requisites: '1323 3434 3434 4567', cardIssuer: 'visa', sum: '0.123454 BTC', createDate: '12.12.2023 23:35', status: 'Созданная заявка', statusColor: 'secondary', statusDate: '12.12.2023 23:45' },
-    { id: 34234234234, clientId: 34234234234, date: '12.12.2023 23:35',closeMethod: "В ручную", closerLogin: "email@email.com", requisites: '1323 3434 3434 4567', cardIssuer: 'visa', sum: '0.123454 BTC', createDate: '12.12.2023 23:35', status: 'Ожидание оплаты', statusColor: 'warning', statusDate: '12.12.2023 23:45' },
-    { id: 34234234234, clientId: 34234234234, date: '12.12.2023 23:35',closeMethod: "В ручную", closerLogin: "email@email.com", requisites: '1323 3434 3434 4567', cardIssuer: 'visa', sum: '0.123454 BTC', createDate: '12.12.2023 23:35', status: 'Созданная заявка', statusColor: 'secondary', statusDate: '12.12.2023 23:45' },
-    { id: 34234234234, clientId: 34234234234, date: '12.12.2023 23:35',closeMethod: "В ручную", closerLogin: "email@email.com", requisites: '1323 3434 3434 4567', cardIssuer: 'visa', sum: '0.123454 BTC', createDate: '12.12.2023 23:35', status: 'Ожидание оплаты', statusColor: 'warning', statusDate: '12.12.2023 23:45' },
-    { id: 34234234234, clientId: 34234234234, date: '12.12.2023 23:35',closeMethod: "В ручную", closerLogin: "email@email.com", requisites: '1323 3434 3434 4567', cardIssuer: 'visa', sum: '0.123454 BTC', createDate: '12.12.2023 23:35', status: 'Созданная заявка', statusColor: 'secondary', statusDate: '12.12.2023 23:45' },
-    { id: 34234234234, clientId: 34234234234, date: '12.12.2023 23:35',closeMethod: "В ручную", closerLogin: "email@email.com", requisites: '1323 3434 3434 4567', cardIssuer: 'visa', sum: '0.123454 BTC', createDate: '12.12.2023 23:35', status: 'Ожидание оплаты', statusColor: 'warning', statusDate: '12.12.2023 23:45' },
-    { id: 34234234234, clientId: 34234234234, date: '12.12.2023 23:35',closeMethod: "В ручную", closerLogin: "email@email.com", requisites: '1323 3434 3434 4567', cardIssuer: 'visa', sum: '0.123454 BTC', createDate: '12.12.2023 23:35', status: 'Созданная заявка', statusColor: 'secondary', statusDate: '12.12.2023 23:45' },
-    { id: 34234234234, clientId: 34234234234, date: '12.12.2023 23:35',closeMethod: "В ручную", closerLogin: "email@email.com", requisites: '1323 3434 3434 4567', cardIssuer: 'visa', sum: '0.123454 BTC', createDate: '12.12.2023 23:35', status: 'Ожидание оплаты', statusColor: 'warning', statusDate: '12.12.2023 23:45' },
-    { id: 34234234234, clientId: 34234234234, date: '12.12.2023 23:35',closeMethod: "В ручную", closerLogin: "email@email.com", requisites: '1323 3434 3434 4567', cardIssuer: 'visa', sum: '0.123454 BTC', createDate: '12.12.2023 23:35', status: 'Созданная заявка', statusColor: 'secondary', statusDate: '12.12.2023 23:45' },
-    { id: 34234234234, clientId: 34234234234, date: '12.12.2023 23:35',closeMethod: "В ручную", closerLogin: "email@email.com", requisites: '1323 3434 3434 4567', cardIssuer: 'visa', sum: '0.123454 BTC', createDate: '12.12.2023 23:35', status: 'Ожидание оплаты', statusColor: 'warning', statusDate: '12.12.2023 23:45' },
-    { id: 34234234234, clientId: 34234234234, date: '12.12.2023 23:35',closeMethod: "В ручную", closerLogin: "email@email.com", requisites: '1323 3434 3434 4567', cardIssuer: 'visa', sum: '0.123454 BTC', createDate: '12.12.2023 23:35', status: 'Созданная заявка', statusColor: 'secondary', statusDate: '12.12.2023 23:45' },
-    { id: 34234234234, clientId: 34234234234, date: '12.12.2023 23:35',closeMethod: "В ручную", closerLogin: "email@email.com", requisites: '1323 3434 3434 4567', cardIssuer: 'visa', sum: '0.123454 BTC', createDate: '12.12.2023 23:35', status: 'Ожидание оплаты', statusColor: 'warning', statusDate: '12.12.2023 23:45' },
-    { id: 34234234234, clientId: 34234234234, date: '12.12.2023 23:35',closeMethod: "В ручную", closerLogin: "email@email.com", requisites: '1323 3434 3434 4567', cardIssuer: 'visa', sum: '0.123454 BTC', createDate: '12.12.2023 23:35', status: 'Созданная заявка', statusColor: 'secondary', statusDate: '12.12.2023 23:45' },
-    { id: 34234234234, clientId: 34234234234, date: '12.12.2023 23:35',closeMethod: "В ручную", closerLogin: "email@email.com", requisites: '1323 3434 3434 4567', cardIssuer: 'visa', sum: '0.123454 BTC', createDate: '12.12.2023 23:35', status: 'Ожидание оплаты', statusColor: 'warning', statusDate: '12.12.2023 23:45' },
-    { id: 34234234234, clientId: 34234234234, date: '12.12.2023 23:35',closeMethod: "В ручную", closerLogin: "email@email.com", requisites: '1323 3434 3434 4567', cardIssuer: 'visa', sum: '0.123454 BTC', createDate: '12.12.2023 23:35', status: 'Созданная заявка', statusColor: 'secondary', statusDate: '12.12.2023 23:45' },
-    { id: 34234234234, clientId: 34234234234, date: '12.12.2023 23:35',closeMethod: "В ручную", closerLogin: "email@email.com", requisites: '1323 3434 3434 4567', cardIssuer: 'visa', sum: '0.123454 BTC', createDate: '12.12.2023 23:35', status: 'Ожидание оплаты', statusColor: 'warning', statusDate: '12.12.2023 23:45' },
-    { id: 34234234234, clientId: 34234234234, date: '12.12.2023 23:35',closeMethod: "В ручную", closerLogin: "email@email.com", requisites: '1323 3434 3434 4567', cardIssuer: 'visa', sum: '0.123454 BTC', createDate: '12.12.2023 23:35', status: 'Созданная заявка', statusColor: 'secondary', statusDate: '12.12.2023 23:45' },
-    { id: 34234234234, clientId: 34234234234, date: '12.12.2023 23:35',closeMethod: "В ручную", closerLogin: "email@email.com", requisites: '1323 3434 3434 4567', cardIssuer: 'visa', sum: '0.123454 BTC', createDate: '12.12.2023 23:35', status: 'Ожидание оплаты', statusColor: 'warning', statusDate: '12.12.2023 23:45' },
-    { id: 34234234234, clientId: 34234234234, date: '12.12.2023 23:35',closeMethod: "В ручную", closerLogin: "email@email.com", requisites: '1323 3434 3434 4567', cardIssuer: 'visa', sum: '0.123454 BTC', createDate: '12.12.2023 23:35', status: 'Созданная заявка', statusColor: 'secondary', statusDate: '12.12.2023 23:45' },
-    { id: 34234234234, clientId: 34234234234, date: '12.12.2023 23:35',closeMethod: "В ручную", closerLogin: "email@email.com", requisites: '1323 3434 3434 4567', cardIssuer: 'visa', sum: '0.123454 BTC', createDate: '12.12.2023 23:35', status: 'Ожидание оплаты', statusColor: 'warning', statusDate: '12.12.2023 23:45' },
-    { id: 34234234234, clientId: 34234234234, date: '12.12.2023 23:35',closeMethod: "В ручную", closerLogin: "email@email.com", requisites: '1323 3434 3434 4567', cardIssuer: 'visa', sum: '0.123454 BTC', createDate: '12.12.2023 23:35', status: 'Созданная заявка', statusColor: 'secondary', statusDate: '12.12.2023 23:45' },
-    { id: 34234234234, clientId: 34234234234, date: '12.12.2023 23:35',closeMethod: "В ручную", closerLogin: "email@email.com", requisites: '1323 3434 3434 4567', cardIssuer: 'visa', sum: '0.123454 BTC', createDate: '12.12.2023 23:35', status: 'Ожидание оплаты', statusColor: 'warning', statusDate: '12.12.2023 23:45' },
-    { id: 34234234234, clientId: 34234234234, date: '12.12.2023 23:35',closeMethod: "В ручную", closerLogin: "email@email.com", requisites: '1323 3434 3434 4567', cardIssuer: 'visa', sum: '0.123454 BTC', createDate: '12.12.2023 23:35', status: 'Подтв. об оплате', statusColor: 'primary', statusDate: '12.12.2023 23:45' }
+    { id: 342423435, clientId: 324324324234, closeDate: '02.09.2022 09:56', createDate: '02.09.2022', closeMethod: 'В ручную', closer: 'email@email.com', method: 'На карту', requisites: '*4567', cardIssuer: 'visa', sum: '0.123454 BTC', exchangeRate: '25,098.09 USDT', createDate: '12.12.2023', statusDate: '12.12.2023 23:45', status: 'Не успешно', statusColor: 'danger', statusChanger: '#' },
+    { id: 342423435, clientId: 324324324234, closeDate: '02.09.2022 09:56', createDate: '02.09.2022', closeMethod: 'В ручную', closer: 'email@email.com', method: 'На карту', requisites: '*4567', cardIssuer: 'mastercard', sum: '0.123454 BTC', exchangeRate: '25,098.09 USDT', createDate: '12.12.2023', statusDate: '12.12.2023 23:45', status: 'Успешно', statusColor: 'success', statusChanger: '#' },
+    { id: 342423435, clientId: 324324324234, closeDate: '02.09.2022 09:56', createDate: '02.09.2022', closeMethod: 'В ручную', closer: 'email@email.com', method: 'На карту', requisites: '*4567', cardIssuer: 'visa', sum: '0.123454 BTC', exchangeRate: '25,098.09 USDT', createDate: '12.12.2023', statusDate: '12.12.2023 23:45', status: 'Обработка', statusColor: 'warning', statusChanger: '#' },
+    { id: 342423435, clientId: 324324324234, closeDate: '02.09.2022 09:56', createDate: '02.09.2022', closeMethod: 'В ручную', closer: 'email@email.com', method: 'На карту', requisites: '*4567', cardIssuer: 'visa', sum: '0.123454 BTC', exchangeRate: '25,098.09 USDT', createDate: '12.12.2023', statusDate: '12.12.2023 23:45', status: 'Обработка', statusColor: 'warning', statusChanger: '#' },
+    { id: 342423435, clientId: 324324324234, closeDate: '02.09.2022 09:56', createDate: '02.09.2022', closeMethod: 'В ручную', closer: 'email@email.com', method: 'На карту', requisites: '*4567', cardIssuer: 'mastercard', sum: '0.123454 BTC', exchangeRate: '25,098.09 USDT', createDate: '12.12.2023', statusDate: '12.12.2023 23:45', status: 'Созданная заявка', statusColor: 'secondary', statusChanger: null },
+    { id: 342423435, clientId: 324324324234, closeDate: '02.09.2022 09:56', createDate: '02.09.2022', closeMethod: 'В ручную', closer: 'email@email.com', method: 'На карту', requisites: '*4567', cardIssuer: 'visa', sum: '0.123454 BTC', exchangeRate: '25,098.09 USDT', createDate: '12.12.2023', statusDate: '12.12.2023 23:45', status: 'Обработка', statusColor: 'warning', statusChanger: '#' }
 ];
 </script>

@@ -50,7 +50,7 @@
       <FCard no-paddings class="py-6 xl:col-span-4">
         <FCardTitle class="ml-8">Текущие выводы</FCardTitle>
         <div>
-          <FTable :headers="summaryHeaders" :items="summaryItems">
+          <FTable :headers="transactionsHeaders" :items="transactionsItems">
             <template #item-requisites="{ item }">
               <div class="flex flex-nowrap">
                 {{ item.requisites }}
@@ -62,7 +62,9 @@
                 <FChip v-bind:[item.statusColor]=true>{{ item.status }}</FChip>
                 <div class="flex flex-nowrap text-secondary font-bold text-sm mt-1">
                   {{ item.statusDate }}
-                  <FIcon icon="person" class="ml-2"/>
+                  <button v-if="item.statusChanger">
+                      <FIcon icon="person" class="ml-2"/>
+                  </button>
                 </div>
               </div>
             </template>
@@ -78,7 +80,7 @@
   </FPage>
 </template>
 <script setup>
-import FPage from '../../components/kit/FPage.vue';
+import FPage from '../../components/layout/FPage.vue';
 import FCard from '../../components/kit/FCard.vue';
 import FCardTitle from '../../components/kit/FCardTitle.vue';
 import FButton from '../../components/kit/FButton.vue';
@@ -90,7 +92,7 @@ import FChip from '../../components/kit/FChip.vue';
 import FArrowButton from '../../components/kit/FArrowButton.vue';
 import FIcon from '../../components/kit/FIcon.vue';
 
-const summaryHeaders = [
+const transactionsHeaders = [
   { text: 'Клиент', field: 'client' },
   { text: 'Способ', field: 'method' },
   { text: 'Реквизиты', field: 'requisites' },
@@ -100,12 +102,12 @@ const summaryHeaders = [
   { text: 'Статус / Дата', field: 'status' },
   { text: '', field: 'edit' }
 ];
-const summaryItems = [
-  { client: 'email@email.com', method: 'На карту', requisites: '*4567', cardIssuer: 'visa', sum: '0.123454 BTC', exchangeRate: '25,098.09 USDT', createDate: '12.12.2023', status: 'Отклонено', statusColor: 'danger', statusDate: '12.12.2023 23:45' },
-  { client: 'email@email.com', method: 'На карту', requisites: '*4567', cardIssuer: 'mastercard', sum: '0.123454 BTC', exchangeRate: '25,098.09 USDT', createDate: '12.12.2023', status: 'Успешно', statusColor: 'success', statusDate: '12.12.2023 23:45' },
-  { client: 'email@email.com', method: 'На карту', requisites: '*4567', cardIssuer: 'visa', sum: '0.123454 BTC', exchangeRate: '25,098.09 USDT', createDate: '12.12.2023', status: 'Обработка', statusColor: 'warning', statusDate: '12.12.2023 23:45' },
-  { client: 'email@email.com', method: 'На карту', requisites: '*4567', cardIssuer: 'visa', sum: '0.123454 BTC', exchangeRate: '25,098.09 USDT', createDate: '12.12.2023', status: 'Обработка', statusColor: 'warning', statusDate: '12.12.2023 23:45' },
-  { client: 'email@email.com', method: 'На карту', requisites: '*4567', cardIssuer: 'visa', sum: '0.123454 BTC', exchangeRate: '25,098.09 USDT', createDate: '12.12.2023', status: 'Обработка', statusColor: 'warning', statusDate: '12.12.2023 23:45' },
-  { client: 'email@email.com', method: 'На карту', requisites: '*4567', cardIssuer: 'mastercard', sum: '0.123454 BTC', exchangeRate: '25,098.09 USDT', createDate: '12.12.2023', status: 'Созданная заявка', statusColor: 'secondary', statusDate: '12.12.2023 23:45' }
+const transactionsItems = [
+  { client: 'email@email.com', method: 'На карту', requisites: '*4567', cardIssuer: 'visa', sum: '0.123454 BTC', exchangeRate: '25,098.09 USDT', createDate: '12.12.2023', status: 'Отклонено', statusColor: 'danger', statusDate: '12.12.2023 23:45', statusChanger: '#' },
+  { client: 'email@email.com', method: 'На карту', requisites: '*4567', cardIssuer: 'mastercard', sum: '0.123454 BTC', exchangeRate: '25,098.09 USDT', createDate: '12.12.2023', status: 'Успешно', statusColor: 'success', statusDate: '12.12.2023 23:45', statusChanger: '#' },
+  { client: 'email@email.com', method: 'На карту', requisites: '*4567', cardIssuer: 'visa', sum: '0.123454 BTC', exchangeRate: '25,098.09 USDT', createDate: '12.12.2023', status: 'Обработка', statusColor: 'warning', statusDate: '12.12.2023 23:45', statusChanger: '#' },
+  { client: 'email@email.com', method: 'На карту', requisites: '*4567', cardIssuer: 'visa', sum: '0.123454 BTC', exchangeRate: '25,098.09 USDT', createDate: '12.12.2023', status: 'Обработка', statusColor: 'warning', statusDate: '12.12.2023 23:45', statusChanger: '#' },
+  { client: 'email@email.com', method: 'На карту', requisites: '*4567', cardIssuer: 'visa', sum: '0.123454 BTC', exchangeRate: '25,098.09 USDT', createDate: '12.12.2023', status: 'Обработка', statusColor: 'warning', statusDate: '12.12.2023 23:45', statusChanger: '#' },
+  { client: 'email@email.com', method: 'На карту', requisites: '*4567', cardIssuer: 'mastercard', sum: '0.123454 BTC', exchangeRate: '25,098.09 USDT', createDate: '12.12.2023', status: 'Созданная заявка', statusColor: 'secondary', statusDate: '12.12.2023 23:45', statusChanger: null }
 ]
 </script>

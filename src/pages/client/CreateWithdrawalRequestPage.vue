@@ -29,6 +29,11 @@
                         <FRadio v-model="withdrawType" text="Вывод средств в фиате" value="fiat" group="withdrawal-type" class="mb-4">
                             <template #hideable-content>
                                 <div>
+                                    <div class="mb-4">
+                                        <FSelect v-model="withdrawTypeCard" label="Выберите способ вывода">
+                                            <FSelectOption value="visa/mastercard" text="На карту VISA / Mastercard"/>
+                                        </FSelect>
+                                    </div>
                                     <div class="flex flex-wrap gap-4">
                                         <div class="flex-grow">
                                             <FTextField
@@ -67,7 +72,13 @@
                         </FRadio>
                         <FRadio v-model="withdrawType" text="Вывод средств в криптовалюте" value="crypto" group="withdrawal-type">
                             <template #hideable-content>
-                                <div>
+                                <div class="flex flex-col gap-y-5">
+                                    <FSelect v-model="cryptoCurrencyType" label="Криптовалюта">
+                                        <FSelectOption value="bitcoin" text="Bitcoin BTC"/>
+                                    </FSelect>
+                                    <FSelect v-model="cryptoRurrencyNetwork" label="Сеть">
+                                        <FSelectOption value="bnb-chain" text="BNB Chain (BEP-20)"/>
+                                    </FSelect>
                                     <div class="flex justify-center flex-wrap gap-x-4">
                                         <div class="flex-grow">
                                             <FTextField
@@ -124,7 +135,7 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import FPage from '../../components/kit/FPage.vue';
+import FPage from '../../components/layout/FPage.vue';
 import FArrowButton from '../../components/kit/FArrowButton.vue';
 import FCard from '../../components/kit/FCard.vue';
 import FCardTitle from '../../components/kit/FCardTitle.vue';
@@ -135,17 +146,16 @@ import FRadio from '../../components/kit/FRadio.vue';
 import FButton from '../../components/kit/FButton.vue';
 import FIcon from '../../components/kit/FIcon.vue';
 import FMessageBox from '../../components/kit/FMessageBox.vue';
-
-const router = useRouter();
+import FSelect from '../../components/kit/FSelect.vue';
+import FSelectOption from '../../components/kit/FSelectOption.vue';
 
 const withdrawType = ref('fiat');
+const withdrawTypeCard = ref('visa/mastercard');
+const cryptoCurrencyType = ref('bitcoin');
+const cryptoRurrencyNetwork = ref('bnb-chain');
 
 const submitMessageBoxVisible = ref(false);
 const onClickSubmit = () => {
     submitMessageBoxVisible.value = true;
-}
-const onClickReturnToHome = () => {
-    submitMessageBoxVisible.value = false;
-    router.push('/');
 }
 </script>

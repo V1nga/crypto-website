@@ -1,5 +1,5 @@
 <template>
-    <FSheet
+    <FMakeSize
         :min-width="minWidth"
         :min-height="minHeight"
         :width="width"
@@ -11,11 +11,11 @@
         :class="cardClasses"
     >
         <slot/>
-    </FSheet>
+    </FMakeSize>
 </template>
 <script setup>
 import { computed } from 'vue';
-import FSheet from './FSheet.vue';
+import FMakeSize from './FMakeSize.vue';
 import MakeSizeProps from '../../props/MakeSizeProps';
 
 const props = defineProps({

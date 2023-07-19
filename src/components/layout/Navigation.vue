@@ -34,7 +34,7 @@ const navigationItems = [
     { text: 'Главная', logo: 'home', path: '/' },
     { text: 'Транзакции', logo: 'transaction', path: '/transactions'  },
     { text: 'Вывод средств', logo: 'wallet', path: '/withdraw-money'  },
-    { text: 'Проблемные платежи', logo: 'warning', path: '/problem-payments'  },
+    { text: 'Проблемные платежи', logo: 'warning', path: '/problematic-payments'  },
     { text: 'Платежные решения', logo: 'noun-bulb-money', path: '/payment-solutions'  },
     { text: 'Настройки', logo: 'cog', path: '/settings'  },
     { text: 'Выйти', logo: 'logout', path: '/logout'  }

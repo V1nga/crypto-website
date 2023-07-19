@@ -1,5 +1,5 @@
 <template>
-    <div class="grid grid-cols-2 grid-cols-[min-content_1fr] gap-y-3">
+    <div class="grid grid-cols-2 grid-cols-[min-content_1fr] gap-y-5">
         <div class="cursor-pointer pr-4" @click="model = value">
             <input
                 v-model="model"

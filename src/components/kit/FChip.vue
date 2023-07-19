@@ -1,5 +1,5 @@
 <template>
-    <div :class="chipClasses" class="px-2 rounded-md font-bold text-sm w-min whitespace-nowrap">
+    <div :class="chipClasses" class="px-2 rounded-md font-bold text-sm w-min whitespace-nowrap flex items-center">
         <slot/>
     </div>
 </template>

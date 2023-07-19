@@ -8,7 +8,7 @@
     >
       <div class="flex flex-nowrap px-3 py-2" :class="{ 'rounded-lg bg-primary-light': active }">
         <slot>{{ text }}</slot>
-        <FIcon :icon="buttonColor.icon" :class="!!$slots.default || text ? 'ml-3' : ''"/>
+        <FIcon :icon="buttonColor.icon" :class="!!$slots.default || text ? 'ml-3' : active ? '' : 'ml-2'"/>
       </div>
     </button>
 </template>
