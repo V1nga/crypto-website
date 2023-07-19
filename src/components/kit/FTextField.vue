@@ -1,5 +1,8 @@
 <template>
-    <div class="f-text-field" :style="`width: ${ width }${ Number.isInteger(width) ? 'px' : '' }`">
+    <div
+      class="f-text-field"
+      :style="`width: ${ width }${ Number.isInteger(width) ? 'px' : '' }; max-width: ${ maxWidth }${ Number.isInteger(maxWidth) ? 'px' : '' };`"
+    >
       <div v-if="label || $slots.label" class="text-sm text-dark font-semibold mb-1">
         <slot name="label">{{ label }}</slot>
       </div>
@@ -43,6 +46,10 @@ const props = defineProps({
       default: 'medium'
     },
     width: {
+      type: [Number, String],
+      default: '100%'
+    },
+    maxWidth: {
       type: [Number, String],
       default: '100%'
     }

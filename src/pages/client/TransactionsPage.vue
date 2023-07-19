@@ -2,7 +2,7 @@
     <FPage title="Транзакции">
         <template #title-append>
             <div class="w-full flex justify-end">
-                <FTextField v-model="searchText" outlined placeholder="Искать по ID транзакции или ID клиента" class="w-4/12 lg:w-3/12">
+                <FTextField v-model="searchText" :max-width="410" outlined placeholder="Искать по ID транзакции или ID клиента" class="w-4/12 lg:w-3/12">
                     <template #prepend>
                         <FIcon icon="search" class="mx-2"/>
                     </template>
