@@ -2,7 +2,7 @@
     <button
         :disabled="disabled"
         :class="buttonClasses"
-        class="px-4 py-2 font-bold rounded-xl"
+        class="px-4 py-2 font-bold rounded-xl outline-0"
         @mouseover="onMouseOver"
         @mouseleave="onMouseLeave"
     >

@@ -2,17 +2,17 @@
     <FPage title="Диспуты">
         <template #title-append>
             <div class="w-full flex justify-end gap-x-4">
-                <FButton light>
+                <FButton light @click="isFiltersVisible = !isFiltersVisible">
                     <div class="flex flex-nowrap gap-x-2">
                         <FIcon icon="pyramid-down"/>
-                        <span>Показать фильтр</span>
+                        <span>{{ isFiltersVisible ? 'Скрыть' : 'Показать' }} фильтр</span>
                     </div>
                 </FButton>
                 <FButton color="danger" hover-color="danger-dark" @click="createDisputMessageboxVisible = true">Создать диспут</FButton>
             </div>
         </template>
         <template #body-prepend>            
-            <div class="px-10 pb-4 flex gap-4 bg-white filter drop-shadow-lg">
+            <div v-show="isFiltersVisible" class="px-7 pb-4 flex gap-4 bg-white filter drop-shadow-lg">
                 <FTextField :max-width="330" outlined placeholder="Искать по ID транзакции" class="flex-grow">
                     <template #prepend>
                         <FIcon icon="search" class="ml-1"/>
@@ -200,6 +200,8 @@ const openDialog = (data) => {
 
 const datePickerValue = ref(null);
 const timePickerValue = ref(null);
+
+const isFiltersVisible = ref(false);
 const createDisputMessageboxVisible = ref(false);
 
 const comments = [
