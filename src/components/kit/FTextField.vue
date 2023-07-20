@@ -23,6 +23,7 @@
                     :placeholder="placeholder"
                     :class="`text-${ textAlign } text-${ textSize } font-${ fontSize }`"
                     class="outline-0 mx-2 text-sm w-full"
+                    type="text"
                 />
                 <slot name="append"/>
             </div>

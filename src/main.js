@@ -1,6 +1,8 @@
 import { createApp } from 'vue';
 import { createRouter, createWebHashHistory } from 'vue-router';
 import './style.css';
+import VueDatePicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css';
 import App from './App.vue';
 import HomePage from './pages/client/HomePage.vue';
 import TransactionPage from './pages/client/TransactionsPage.vue';
@@ -25,5 +27,6 @@ const router = createRouter({
 
 const app = createApp(App);
 
+app.component('VueDatePicker', VueDatePicker);
 app.use(router);
 app.mount('#app');

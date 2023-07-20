@@ -7,8 +7,13 @@
             </div>
             <slot name="title-append"/>
         </div>
-        <div class="p-6 2xl:p-10 grid grid-cols-1">
-            <slot/>
+        <div class="flex flex-col">
+            <div class="p-6 2xl:p-10 grid grid-cols-1">
+                <slot/>
+            </div>
+            <div class="order-first">
+                <slot name="body-prepend"/>
+            </div>
         </div>
     </div>
 </template>

@@ -19,12 +19,12 @@
                 :class="{ 'border-primary': isMenuVisible }"
                 @click="showSelectMenu"
             >
-                <div class="w-full" :class="`text-${ textSize } font-${ fontSize }`">
+                <div class="w-full pl-1" :class="`text-${ textSize } font-${ fontSize }`">
                   <slot name="body" :item="selectedItem">
-                    {{ itemTitle && selectedItem ? selectedItem[itemTitle] : selectedItem }}
+                    {{ selectedItem && selectedItem[itemTitle] }}
                   </slot>
                 </div>
-               <FIcon :icon="isMenuVisible ? 'arrow-down-primary' : 'arrow-down-secondary'" class="mr-2"/>
+               <FIcon :icon="isMenuVisible ? 'arrow-down-primary' : 'arrow-down-secondary'" class="mx-2"/>
             </div>
             <div
               v-show="isMenuVisible"
@@ -34,10 +34,10 @@
                 v-for="(item, index) of items"
                 :key="index"
                 class="p-2 font-semibold rounded-xl"
-                :class="{ 'bg-primary-light text-primary': value === (itemValue ? item[itemValue] : item) }"
+                :class="{ 'bg-primary-light text-primary': value === item[itemValue] }"
                 @click="onClickSelect(item)"
               >
-                <slot name="item" :item="item">{{ itemTitle ? item[itemTitle] : item }}</slot>
+                <slot name="item" :item="item">{{ item[itemTitle] }}</slot>
               </div>
             </div>
         </template>
@@ -92,7 +92,7 @@ const hideSelectMenu = () => {
 const selectedItem = ref(null);
 const onClickSelect = (item) => {
   selectedItem.value = item;
-  value.value = props.itemValue ? item[props.itemValue] : item;
+  value.value = item[props.itemValue];
 };
 
 const value = computed({
@@ -106,7 +106,7 @@ const value = computed({
 
 onMounted(() => {
   if(props.modelValue) {
-    selectedItem.value = props.items.find(item => props.modelValue === (props.itemValue ? item[props.itemValue] : item));
+    selectedItem.value = props.items.find(item => props.modelValue === item[props.itemValue]);
   }
 });
 </script>

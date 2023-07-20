@@ -12,41 +12,32 @@
           <slot name="label"/>
         </template>
         <template #default>
-            <div class="border-2 border-primary-light rounded-xl px-1 py-2 flex bg-white">
-                <textarea
-                    v-model="value"
-                    cols="40"
-                    rows="5"
-                    :placeholder="placeholder"
-                    class="outline-0 mx-2 text-sm w-full h-auto"
-                />
-            </div>
+            <VueDatePicker v-model="value" time-picker>
+                <template #trigger>
+                    <div class="cursor-pointer border-2 border-primary-light rounded-xl px-3 py-2 flex flex-nowrap gap-x-3 bg-white">
+                        <FIcon icon="clock"/>
+                        <div class="font-semibold">
+                          {{ value ? `${ value.hours }:${ value.minutes }` : '--:--' }}
+                        </div>
+                    </div>
+                </template>
+            </VueDatePicker>
         </template>
     </FInputBase>
 </template>
 <script setup>
 import { computed } from 'vue';
-import FInputBase from './FInputBase.vue';
 import MakeSizeProps from '../../props/MakeSizeProps';
+import FInputBase from './FInputBase.vue';
+import FIcon from './FIcon.vue';
 
 const emit = defineEmits(['update:modelValue']);
 const props = defineProps({
     modelValue: {
-        type: String
+        type: Object
     },
     label: {
-        type: String
-    },
-    placeholder: {
-        type: String
-    },
-    width: {
-      type: [Number, String],
-      default: '100%'
-    },
-    maxWidth: {
-      type: [Number, String],
-      default: '100%'
+      type: String
     },
     ...MakeSizeProps
 });
@@ -60,8 +51,3 @@ const value = computed({
   }
 });
 </script>
-<style scoped>
-textarea {
-  resize: none
-}
-</style>

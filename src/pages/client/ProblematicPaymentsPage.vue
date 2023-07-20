@@ -11,6 +11,34 @@
                 <FButton color="danger" hover-color="danger-dark" @click="createDisputMessageboxVisible = true">Создать диспут</FButton>
             </div>
         </template>
+        <template #body-prepend>            
+            <div class="px-10 pb-4 flex gap-4 bg-white filter drop-shadow-lg">
+                <FTextField :max-width="330" outlined placeholder="Искать по ID транзакции" class="flex-grow">
+                    <template #prepend>
+                        <FIcon icon="search" class="ml-1"/>
+                    </template>
+                </FTextField>
+                <div class="flex-grow justify-end flex gap-4">
+                    <FSelect
+                        :max-width="170"                    
+                        :items="[{ text: 'Статус', value: 'status' }]"
+                        modelValue="status"
+                        class="flex-grow"
+                    />
+                    <FDatePicker
+                        v-model="datePickerValue"
+                        :max-width="240"
+                        range
+                        class="flex-grow"
+                    />
+                    <FTimePicker
+                        v-model="timePickerValue"
+                        :max-width="160"
+                        class="flex-grow"
+                    />                  
+                </div>
+            </div>
+        </template>
         <template #default>
             <FCard no-paddings>
                 <FTable :headers="disputsHeaders" :items="disputsItems">
@@ -159,6 +187,9 @@ import FMessageBox from '../../components/kit/FMessageBox.vue';
 import FTextField from '../../components/kit/FTextField.vue';
 import FTextArea from '../../components/kit/FTextArea.vue';
 import TransactionDialog from '../../components/layout/TransactionDialog.vue';
+import FSelect from '../../components/kit/FSelect.vue';
+import FTimePicker from '../../components/kit/FTimePicker.vue';
+import FDatePicker from '../../components/kit/FDatePicker.vue';
 
 const dialogData = ref(null);
 const dialogVisible = ref(false);
@@ -167,6 +198,8 @@ const openDialog = (data) => {
     dialogVisible.value = !dialogVisible.value;
 };
 
+const datePickerValue = ref(null);
+const timePickerValue = ref(null);
 const createDisputMessageboxVisible = ref(false);
 
 const comments = [
