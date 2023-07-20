@@ -44,8 +44,7 @@
                         label="ID диспута"
                         placeholder="Введите ID диспута"
                     />
-                    <FTextField
-                        outlined
+                    <FTextArea
                         label="Доп. информация"
                         placeholder="Напишите что-нибудь..."
                     />
@@ -158,6 +157,7 @@ import FChip from '../../components/kit/FChip.vue';
 import FArrowButton from '../../components/kit/FArrowButton.vue';
 import FMessageBox from '../../components/kit/FMessageBox.vue';
 import FTextField from '../../components/kit/FTextField.vue';
+import FTextArea from '../../components/kit/FTextArea.vue';
 import TransactionDialog from '../../components/layout/TransactionDialog.vue';
 
 const dialogData = ref(null);

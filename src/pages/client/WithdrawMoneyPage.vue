@@ -86,6 +86,11 @@
                                 placeholder="Напишите что-нибудь..."
                                 class="mb-5"
                             />
+                            <FTextArea
+                                label="Доп. информация"
+                                placeholder="Напишите что-нибудь..."
+                                class="mb-5"
+                            />
                         </FMessageBox>
                     </div>
                 </template>
@@ -139,6 +144,7 @@ import TransactionDialog from '../../components/layout/TransactionDialog.vue';
 import FMessageBox from '../../components/kit/FMessageBox.vue';
 import FTextField from '../../components/kit/FTextField.vue';
 import FIcon from '../../components/kit/FIcon.vue';
+import FTextArea from '../../components/kit/FTextArea.vue';
 
 const transactionDialogData = ref(null);
 const transactionDialogVisible = ref(false);

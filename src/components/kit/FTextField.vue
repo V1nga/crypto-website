@@ -1,23 +1,38 @@
 <template>
-    <div
-      class="f-text-field"
-      :style="`width: ${ width }${ Number.isInteger(width) ? 'px' : '' }; max-width: ${ maxWidth }${ Number.isInteger(maxWidth) ? 'px' : '' };`"
+    <FInputBase
+        :min-width="minWidth"
+        :min-height="minHeight"
+        :width="width"
+        :height="height"
+        :max-width="maxWidth"
+        :max-height="maxHeight"
+        :label="label"
+        class="f-text-field"
     >
-      <div v-if="label || $slots.label" class="text-sm text-dark font-semibold mb-1">
-        <slot name="label">{{ label }}</slot>
-      </div>
-      <div
-        class="border-2 rounded-xl px-1 py-2 flex bg-white"
-        :class="outlined ? 'border-primary-light' : 'border-white filter drop-shadow-xl'"
-      >
-          <slot name="prepend"/>
-          <input v-model="value" :placeholder="placeholder" class="mx-2 text-sm w-full" :class="`text-${ textAlign } text-${ textSize } font-${ fontSize }`"/>
-          <slot name="append"/>
-      </div>
-    </div>
+        <template #label>
+          <slot name="label"/>
+        </template>
+        <template #default>
+            <div
+                class="border-2 rounded-xl px-1 py-2 flex bg-white"
+                :class="outlined ? 'border-primary-light' : 'border-white filter drop-shadow-xl'"
+            >
+                <slot name="prepend"/>
+                <input
+                    v-model="value"
+                    :placeholder="placeholder"
+                    :class="`text-${ textAlign } text-${ textSize } font-${ fontSize }`"
+                    class="outline-0 mx-2 text-sm w-full"
+                />
+                <slot name="append"/>
+            </div>
+        </template>
+    </FInputBase>
 </template>
 <script setup>
 import { computed } from 'vue'
+import MakeSizeProps from '../../props/MakeSizeProps';
+import FInputBase from './FInputBase.vue';
 
 const emit = defineEmits(['update:modelValue']);
 const props = defineProps({
@@ -52,7 +67,8 @@ const props = defineProps({
     maxWidth: {
       type: [Number, String],
       default: '100%'
-    }
+    },
+    ...MakeSizeProps
 });
 
 const value = computed({
@@ -67,9 +83,5 @@ const value = computed({
 <style scoped>
 .f-text-field {
   min-width: 100px;
-}
-
-input:focus {
-    outline: none;
 }
 </style>

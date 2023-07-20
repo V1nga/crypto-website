@@ -1,28 +1,54 @@
 <template>
-    <FMakeSize
+    <FInputBase
         :min-width="minWidth"
         :min-height="minHeight"
         :width="width"
         :height="height"
         :max-width="maxWidth"
         :max-height="maxHeight"
-        class="f-select"
+        :label="label"
+        class="relative"
     >
-      <div v-if="label || $slots.label" class="text-sm text-dark font-semibold mb-1">
-          <slot name="label">{{ label }}</slot>
-      </div>
-        <select
-            v-model="value"
-            class="appearance-none w-full outline-0 border-2 rounded-xl px-1 py-2 bg-white border-primary-light focus:border-primary px-2"
-            :class="`text-${ textSize } font-${ fontSize }`"
-        >
-            <slot/>
-        </select>
-    </FMakeSize>
+        <template #label>
+            <slot name="label"/>
+        </template>
+        <template #default>
+            <div
+                v-click-out-side="hideSelectMenu"
+                class="p-2 cursor-pointer border-2 border-primary-light rounded-xl flex bg-white"
+                :class="{ 'border-primary': isMenuVisible }"
+                @click="showSelectMenu"
+            >
+                <div class="w-full" :class="`text-${ textSize } font-${ fontSize }`">
+                  <slot name="body" :item="selectedItem">
+                    {{ itemTitle && selectedItem ? selectedItem[itemTitle] : selectedItem }}
+                  </slot>
+                </div>
+               <FIcon :icon="isMenuVisible ? 'arrow-down-primary' : 'arrow-down-secondary'" class="mr-2"/>
+            </div>
+            <div
+              v-show="isMenuVisible"
+              class="f-select-menu mt-2 p-2 rounded-xl absolute filter drop-shadow-2xl bg-white w-full flex flex-col gap-y-2"
+            >
+              <div
+                v-for="(item, index) of items"
+                :key="index"
+                class="p-2 font-semibold rounded-xl"
+                :class="{ 'bg-primary-light text-primary': value === (itemValue ? item[itemValue] : item) }"
+                @click="onClickSelect(item)"
+              >
+                <slot name="item" :item="item">{{ itemTitle ? item[itemTitle] : item }}</slot>
+              </div>
+            </div>
+        </template>
+    </FInputBase>
 </template>
 <script setup>
-import { computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
+import { clickOutSide as vClickOutSide } from '@mahdikhashan/vue3-click-outside';
 import MakeSizeProps from '../../props/MakeSizeProps';
+import FInputBase from './FInputBase.vue';
+import FIcon from '../../components/kit/FIcon.vue';
 
 const emit = defineEmits(['update:modelValue']);
 const props = defineProps({
@@ -40,8 +66,34 @@ const props = defineProps({
       type: String,
       default: 'semibold'
     },
+    items: {
+      type: Array,
+      default: []
+    },
+    itemTitle: {
+      type: String,
+      default: 'text'
+    },
+    itemValue: {
+      type: String,
+      default: 'value'
+    },
     ...MakeSizeProps
 });
+
+const isMenuVisible = ref(false);
+const showSelectMenu = () => {
+  isMenuVisible.value = true;
+}
+const hideSelectMenu = () => {
+  isMenuVisible.value = false;
+}
+
+const selectedItem = ref(null);
+const onClickSelect = (item) => {
+  selectedItem.value = item;
+  value.value = props.itemValue ? item[props.itemValue] : item;
+};
 
 const value = computed({
   get() {
@@ -51,15 +103,15 @@ const value = computed({
     emit('update:modelValue', value);
   }
 });
+
+onMounted(() => {
+  if(props.modelValue) {
+    selectedItem.value = props.items.find(item => props.modelValue === (props.itemValue ? item[props.itemValue] : item));
+  }
+});
 </script>
 <style scoped>
-.f-select select {
-    background-image: url("/icons/arrow-down-secondary.svg");
-    background-repeat: no-repeat;
-    background-position-x: calc(100% - 10px);
-    background-position-y: 50%;
-}
-.f-select select:focus {
-    background-image: url("/icons/arrow-down-primary.svg");
+.f-select-menu {
+  z-index: 102;
 }
 </style>

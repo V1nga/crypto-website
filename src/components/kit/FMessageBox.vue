@@ -67,7 +67,7 @@ const onClickApply = () => {
     width: 100%;
     height: 100%;
     background-color: #FFFFFFB2;
-    z-index: 999999;
+    z-index: 101;
 }
 
 .f-messagebox-buttons {

@@ -61,7 +61,7 @@ const onClickClose = () => {
     top: 0;
     right: 0;
     box-shadow: -10px 4px 24px 0px #00000026;
-    z-index: 9999;
+    z-index: 100;
 }
 
 .f-dialog-close-btn {
