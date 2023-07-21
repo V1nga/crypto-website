@@ -19,7 +19,7 @@
 <script setup>
 import { ref, computed } from 'vue';
 import FIcon from './FIcon.vue';
-import { clickOutSide as vClickOutSide } from '@mahdikhashan/vue3-click-outside'
+import { clickOutSide as vClickOutSide } from '@mahdikhashan/vue3-click-outside';
 
 const emit = defineEmits(['update:modelValue']);
 const props = defineProps({

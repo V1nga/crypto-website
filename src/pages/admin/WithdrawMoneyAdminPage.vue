@@ -2,11 +2,46 @@
     <FPage title="Вывод средств">
         <template #title-append>
             <div class="w-full flex justify-end">
-                <div class="flex flex-nowrap items-center mr-6">
-                    <div class="text-dark font-semibold mr-2">Доступно для вывода:</div>
-                    <FMoney :money="12987.89" currency="USDT" text-size="2xl" slug-text-size="sm" font-weight="bold"/>
+                <FButton light @click="isFiltersVisible = !isFiltersVisible">
+                    <div class="flex flex-nowrap gap-x-2">
+                        <FIcon icon="pyramid-down"/>
+                        <span>{{ isFiltersVisible ? 'Скрыть' : 'Показать' }} фильтр</span>
+                    </div>
+                </FButton>
+            </div>
+        </template>
+        <template #body-prepend>            
+            <div v-show="isFiltersVisible" class="px-7 pb-4 flex flex-wrap gap-4 bg-white filter drop-shadow-lg">
+                <div class="border-[1px] border-primary-light w-full"/>
+                <FTextField outlined placeholder="Искать по ID, реквизитам или email" width="100%">
+                    <template #prepend>
+                        <FIcon icon="search" class="ml-1"/>
+                    </template>
+                </FTextField>
+                <FSelect
+                    :max-width="200"                    
+                    :items="[{ text: 'На рассмотрении', value: 'pending' }, { text: 'Отклонен', value: 'canceled' }, { text: 'Одобрен', value: 'success' }]"
+                    placeholder="Статус"
+                    class="flex-grow"
+                />
+                <FDatePicker
+                    v-model="datePickerValue"
+                    :max-width="280"
+                    range
+                    class="flex-grow"
+                />       
+                <FSelect
+                    :max-width="200"                    
+                    :items="[{ text: 'USDT', value: 'usdt' }]"
+                    placeholder="Валюта"
+                    class="flex-grow"
+                />
+                <div class="flex-grow flex flex-nowrap items-center justify-end gap-x-2 text-dark font-semibold">
+                    Сумма от:
+                    <FTextField :max-width="90" outlined placeholder="00"/>
+                    до
+                    <FTextField :max-width="90" outlined placeholder="00"/>
                 </div>
-                <FButton @click="$router.push('/create-withdrawal-requrest')">Подать заявку на вывод</FButton>
             </div>
         </template>
         <template #default>
@@ -59,33 +94,20 @@
                 <template #header-date="{ date }">
                     <div class="flex flex-nowrap items-center gap-x-1">
                         {{ date }}
-                        <button>
+                        <button @click="openStatusMessageBox">
                             <FIcon icon="pencil"/>
                         </button>
-                    </div>
-                </template>
-                <template #header-append>
-                    <div class="whitespace-nowrap">
-                        <span class="font-bold text-dark mr-1">Кем изменен статус:</span>
-                        <span class="font-semibold text-primary">{{ transactionDialogData.closer }}</span>
-                    </div>
-                </template>
-                <template #transaction-id="{ transaction }">
-                    <div class="flex flex-nowrap items-center">
-                        <div>
-                            <p class="text-secondary">ID транзакции</p>
-                            <p class="text-xl font-bold">{{ transaction.id }}</p>
-                        </div>
-                        <div class="w-full flex justify-end">
-                            <FButton color="danger" hover-color="danger-dark" @click="openDisputMessageBox">Создать диспут</FButton>
-                        </div>
-                        <FMessageBox v-model="disputMessageBoxVisible" title="Создать диспут" absolute>
-                            <FTextField
-                                outlined
-                                label="Доп. информация"
-                                placeholder="Напишите что-нибудь..."
-                                class="mb-5"
-                            />
+                        <FMessageBox v-model="statusMessageBoxVisible" title="Сменить статус" absolute>
+                            <FSelect         
+                                v-model="transactionDialogData.statusValue"         
+                                :items="[{ text: 'Не успешно', value: 'canceled', color: 'danger' }, { text: 'Успешно', value: 'success', color: 'success' }, { text: 'Обработка', value: 'pending', color: 'warning' }, { text: 'Созданная заявка', value: 'created', color: 'secondary' }]"
+                                label="Статус"
+                                class="flex-grow mb-5"
+                            >
+                                <template #selected-item="{ item }">
+                                    <FChip v-bind:[item.color]=true>{{ item.text }}</FChip>
+                                </template>
+                            </FSelect>
                             <FTextArea
                                 label="Доп. информация"
                                 placeholder="Напишите что-нибудь..."
@@ -94,10 +116,26 @@
                         </FMessageBox>
                     </div>
                 </template>
+                <template #header-append>
+                    <div class="whitespace-nowrap">
+                        <span class="font-bold text-dark mr-1">Кем изменен статус:</span>
+                        <span class="font-semibold text-primary">{{ transactionDialogData.closer }}</span>
+                    </div>
+                </template>
+                <template #transaction-closer="{ transaction }">
+                    <div class="text-primary">
+                        {{ transaction.closer }}
+                    </div>
+                </template>
                 <template #transaction-requisites="{ transaction }">
-                    <div class="font-semibold flex flex-nowrap">
+                    <div class="font-semibold flex flex-nowrap gap-x-1">
                         {{ transaction.requisites }}
-                        <FIcon :icon="transaction.cardIssuer" class="ml-2"/>
+                        <FIcon :icon="transaction.cardIssuer"/>
+                        <div class="flex-grow flex justify-end">
+                            <button>
+                                <FIcon icon="pencil"/>
+                            </button>
+                        </div>
                     </div>
                 </template>
                 <template #comment-login="{ comment }">
@@ -134,7 +172,6 @@
 <script setup>
 import { ref } from 'vue';
 import FPage from '../../components/layout/FPage.vue';
-import FMoney from '../../components/kit/FMoney.vue';
 import FCard from '../../components/kit/FCard.vue';
 import FTable from '../../components/kit/FTable.vue';
 import FChip from '../../components/kit/FChip.vue';
@@ -145,6 +182,11 @@ import FMessageBox from '../../components/kit/FMessageBox.vue';
 import FTextField from '../../components/kit/FTextField.vue';
 import FIcon from '../../components/kit/FIcon.vue';
 import FTextArea from '../../components/kit/FTextArea.vue';
+import FDatePicker from '../../components/kit/FDatePicker.vue';
+import FSelect from '../../components/kit/FSelect.vue';
+
+const isFiltersVisible = ref(false);
+const datePickerValue = ref(null);
 
 const transactionDialogData = ref(null);
 const transactionDialogVisible = ref(false);
@@ -153,8 +195,8 @@ const openTransactionDialog = (data) => {
     transactionDialogVisible.value = !transactionDialogVisible.value;
 };
 
-const disputMessageBoxVisible = ref(false);
-const openDisputMessageBox = () => disputMessageBoxVisible.value = true;
+const statusMessageBoxVisible = ref(false);
+const openStatusMessageBox = () => statusMessageBoxVisible.value = true;
 
 const comments = [
     { login: "email@email.com", date: "23.09.2020 23:00", status: 'Обработка', statusColor: 'warning', previousStatus: 'Созданная заявка', previousStatusColor: 'secondary', text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco Lorem ipsum dolor sit amet", attachments: [ { fileName: 'чек об оплате.jpeg', fileSize: '2.57 MB' } ] },
@@ -169,11 +211,11 @@ const transactionsHeaders = [
   { text: '', field: 'edit' }
 ];
 const transactionsItems = [
-    { id: 342423435, clientId: 324324324234, closeDate: '02.09.2022 09:56', createDate: '02.09.2022', closeMethod: 'В ручную', closer: 'email@email.com', method: 'На карту', requisites: '*4567', cardIssuer: 'visa', sum: '0.123454 BTC', exchangeRate: '25,098.09 USDT', createDate: '12.12.2023', statusDate: '12.12.2023 23:45', status: 'Не успешно', statusColor: 'danger', statusChanger: '#' },
-    { id: 342423435, clientId: 324324324234, closeDate: '02.09.2022 09:56', createDate: '02.09.2022', closeMethod: 'В ручную', closer: 'email@email.com', method: 'На карту', requisites: '*4567', cardIssuer: 'mastercard', sum: '0.123454 BTC', exchangeRate: '25,098.09 USDT', createDate: '12.12.2023', statusDate: '12.12.2023 23:45', status: 'Успешно', statusColor: 'success', statusChanger: '#' },
-    { id: 342423435, clientId: 324324324234, closeDate: '02.09.2022 09:56', createDate: '02.09.2022', closeMethod: 'В ручную', closer: 'email@email.com', method: 'На карту', requisites: '*4567', cardIssuer: 'visa', sum: '0.123454 BTC', exchangeRate: '25,098.09 USDT', createDate: '12.12.2023', statusDate: '12.12.2023 23:45', status: 'Обработка', statusColor: 'warning', statusChanger: '#' },
-    { id: 342423435, clientId: 324324324234, closeDate: '02.09.2022 09:56', createDate: '02.09.2022', closeMethod: 'В ручную', closer: 'email@email.com', method: 'На карту', requisites: '*4567', cardIssuer: 'visa', sum: '0.123454 BTC', exchangeRate: '25,098.09 USDT', createDate: '12.12.2023', statusDate: '12.12.2023 23:45', status: 'Обработка', statusColor: 'warning', statusChanger: '#' },
-    { id: 342423435, clientId: 324324324234, closeDate: '02.09.2022 09:56', createDate: '02.09.2022', closeMethod: 'В ручную', closer: 'email@email.com', method: 'На карту', requisites: '*4567', cardIssuer: 'visa', sum: '0.123454 BTC', exchangeRate: '25,098.09 USDT', createDate: '12.12.2023', statusDate: '12.12.2023 23:45', status: 'Обработка', statusColor: 'warning', statusChanger: '#' },
-    { id: 342423435, clientId: 324324324234, closeDate: '02.09.2022 09:56', createDate: '02.09.2022', closeMethod: 'В ручную', closer: 'email@email.com', method: 'На карту', requisites: '*4567', cardIssuer: 'mastercard', sum: '0.123454 BTC', exchangeRate: '25,098.09 USDT', createDate: '12.12.2023', statusDate: '12.12.2023 23:45', status: 'Созданная заявка', statusColor: 'secondary', statusChanger: null },
+    { id: 342423435, clientId: 324324324234, closeDate: '02.09.2022 09:56', createDate: '02.09.2022', closeMethod: 'В ручную', closer: 'email@email.com', method: 'На карту', requisites: '*4567', cardIssuer: 'visa', sum: '0.123454 BTC', exchangeRate: '25,098.09 USDT', createDate: '12.12.2023', statusDate: '12.12.2023 23:45', status: 'Не успешно', statusValue: 'canceled', statusColor: 'danger', statusChanger: '#' },
+    { id: 342423435, clientId: 324324324234, closeDate: '02.09.2022 09:56', createDate: '02.09.2022', closeMethod: 'В ручную', closer: 'email@email.com', method: 'На карту', requisites: '*4567', cardIssuer: 'mastercard', sum: '0.123454 BTC', exchangeRate: '25,098.09 USDT', createDate: '12.12.2023', statusDate: '12.12.2023 23:45', status: 'Успешно', statusValue: 'success',  statusColor: 'success', statusChanger: '#' },
+    { id: 342423435, clientId: 324324324234, closeDate: '02.09.2022 09:56', createDate: '02.09.2022', closeMethod: 'В ручную', closer: 'email@email.com', method: 'На карту', requisites: '*4567', cardIssuer: 'visa', sum: '0.123454 BTC', exchangeRate: '25,098.09 USDT', createDate: '12.12.2023', statusDate: '12.12.2023 23:45', status: 'Обработка', statusValue: 'pending',  statusColor: 'warning', statusChanger: '#' },
+    { id: 342423435, clientId: 324324324234, closeDate: '02.09.2022 09:56', createDate: '02.09.2022', closeMethod: 'В ручную', closer: 'email@email.com', method: 'На карту', requisites: '*4567', cardIssuer: 'visa', sum: '0.123454 BTC', exchangeRate: '25,098.09 USDT', createDate: '12.12.2023', statusDate: '12.12.2023 23:45', status: 'Обработка', statusValue: 'pending', statusColor: 'warning', statusChanger: '#' },
+    { id: 342423435, clientId: 324324324234, closeDate: '02.09.2022 09:56', createDate: '02.09.2022', closeMethod: 'В ручную', closer: 'email@email.com', method: 'На карту', requisites: '*4567', cardIssuer: 'visa', sum: '0.123454 BTC', exchangeRate: '25,098.09 USDT', createDate: '12.12.2023', statusDate: '12.12.2023 23:45', status: 'Обработка', statusValue: 'pending', statusColor: 'warning', statusChanger: '#' },
+    { id: 342423435, clientId: 324324324234, closeDate: '02.09.2022 09:56', createDate: '02.09.2022', closeMethod: 'В ручную', closer: 'email@email.com', method: 'На карту', requisites: '*4567', cardIssuer: 'mastercard', sum: '0.123454 BTC', exchangeRate: '25,098.09 USDT', createDate: '12.12.2023', statusDate: '12.12.2023 23:45', status: 'Созданная заявка', statusValue: 'created',  statusColor: 'secondary', statusChanger: null },
 ];
 </script>

@@ -45,9 +45,9 @@ const adminNavigationItems = [
     { text: 'Карты', logo: 'cards', path: '/admin/cards'  },
     { text: 'Транзакции', logo: 'transaction', path: '/admin/transactions'  },
     { text: 'Вывод средств', logo: 'wallet', path: '/admin/withdraw-money'  },
-    { text: 'Проблемные платежи', logo: 'warning', path: '/problematic-payments'  },    
-    { text: 'Пользователи', logo: 'persons', path: '/users'  },
-    { text: 'Платежные решения', logo: 'noun-bulb-money', path: '/payment-solutions'  },
+    { text: 'Проблемные платежи', logo: 'warning', path: '/admin/problematic-payments'  },    
+    { text: 'Пользователи', logo: 'persons', path: '/admin/users'  },
+    { text: 'Платежные решения', logo: 'noun-bulb-money', path: '/admin/payment-solutions'  },
     { text: 'Настройки', logo: 'cog', path: '/settings'  },
     { text: 'Выйти', logo: 'logout', path: '/logout'  }
 ];

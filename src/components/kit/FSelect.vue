@@ -19,10 +19,15 @@
                 :class="{ 'border-primary': isMenuVisible }"
                 @click="toggleShowSelectMenu"
             >
-                <div class="pl-1 w-full whitespace-nowrap" :class="`text-${ textSize } font-${ fontSize }`">
-                  <slot name="body" :item="selectedItem">
-                    {{ selectedItem ? selectedItem[itemTitle] : placeholder ?? 'Выберите' }}
-                  </slot>
+                <div class="pl-1 w-full whitespace-nowrap text-left" :class="`text-${ textSize } font-${ fontSize }`">
+                  <template v-if="selectedItem">
+                    <slot name="selected-item" :item="selectedItem">
+                      {{ selectedItem[itemTitle] }}
+                    </slot>
+                  </template>
+                  <template v-else>
+                    {{ placeholder ?? 'Выберите' }}
+                  </template>
                 </div>
                <FIcon :icon="isMenuVisible ? 'arrow-down-primary' : 'arrow-down-secondary'" class="mx-2"/>
             </div>
@@ -33,7 +38,7 @@
               <div
                 v-for="(item, index) of items"
                 :key="index"
-                class="p-2 font-semibold rounded-xl"
+                class="p-2 text-left font-semibold rounded-xl cursor-pointer"
                 :class="{ 'bg-primary-light text-primary': (value || (selectedItem && selectedItem[itemValue])) === item[itemValue] }"
                 @click="onClickSelect(item)"
               >
@@ -103,6 +108,10 @@ const onClickSelect = (item) => {
 
 const value = computed({
   get() {
+    if(selectedItem != props.modelValue) {
+      selectedItem.value = props.items.find(item => props.modelValue === item[props.itemValue]);
+    }
+
     return props.modelValue;
   },
   set(value) {

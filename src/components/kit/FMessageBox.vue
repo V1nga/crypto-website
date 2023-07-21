@@ -1,6 +1,7 @@
 <template>
     <div
         v-show="visible"
+        v-click-out-side="onClickCancel"
         :class="absolute ? 'absolute' : 'fixed'"
         class="f-messagebox-overlay flex justify-center items-center"
     >
@@ -19,11 +20,11 @@
     </div>
 </template>
 <script setup>
-import { computed } from 'vue';
+import { ref, computed } from 'vue';
+import { clickOutSide as vClickOutSide } from '@mahdikhashan/vue3-click-outside';
 import FCard from './FCard.vue';
 import FCardTitle from './FCardTitle.vue';
 import FButton from './FButton.vue';
-import MakeSizeProps from '../../props/MakeSizeProps';
 
 const emit = defineEmits(['update:modelValue', 'click:cancel', 'click:apply']);
 const props = defineProps({
@@ -42,18 +43,28 @@ const props = defineProps({
     }
 });
 
+const messageBoxLoaded = ref(false);
 const visible = computed({
   get() {
+    if(props.modelValue) {
+        setTimeout(() => {
+            messageBoxLoaded.value = true;
+        }, 100);
+    }
+
     return props.modelValue;
   },
   set(value) {
+    messageBoxLoaded.value = value;
     emit('update:modelValue', value);
   }
 });
 
 const onClickCancel = () => {
-    visible.value = false;
-    emit('click:cancel');
+    if(messageBoxLoaded.value) {
+        visible.value = false;
+        emit('click:cancel');
+    }
 };
 const onClickApply = () => {
     visible.value = false;
