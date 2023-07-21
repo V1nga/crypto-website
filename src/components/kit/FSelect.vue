@@ -17,11 +17,11 @@
                 v-click-out-side="hideSelectMenu"
                 class="p-2 cursor-pointer border-2 border-primary-light rounded-xl flex bg-white"
                 :class="{ 'border-primary': isMenuVisible }"
-                @click="showSelectMenu"
+                @click="toggleShowSelectMenu"
             >
-                <div class="w-full pl-1" :class="`text-${ textSize } font-${ fontSize }`">
+                <div class="pl-1 w-full whitespace-nowrap" :class="`text-${ textSize } font-${ fontSize }`">
                   <slot name="body" :item="selectedItem">
-                    {{ selectedItem && selectedItem[itemTitle] }}
+                    {{ selectedItem ? selectedItem[itemTitle] : placeholder ?? 'Выберите' }}
                   </slot>
                 </div>
                <FIcon :icon="isMenuVisible ? 'arrow-down-primary' : 'arrow-down-secondary'" class="mx-2"/>
@@ -34,7 +34,7 @@
                 v-for="(item, index) of items"
                 :key="index"
                 class="p-2 font-semibold rounded-xl"
-                :class="{ 'bg-primary-light text-primary': value === item[itemValue] }"
+                :class="{ 'bg-primary-light text-primary': (value || (selectedItem && selectedItem[itemValue])) === item[itemValue] }"
                 @click="onClickSelect(item)"
               >
                 <slot name="item" :item="item">{{ item[itemTitle] }}</slot>
@@ -57,6 +57,12 @@ const props = defineProps({
     },
     label: {
       type: String
+    },
+    placeholder: {
+      type: String
+    },
+    mandatory: {
+      type: Boolean
     },
     textSize: {
       type: String,
@@ -82,8 +88,8 @@ const props = defineProps({
 });
 
 const isMenuVisible = ref(false);
-const showSelectMenu = () => {
-  isMenuVisible.value = true;
+const toggleShowSelectMenu = () => {
+  isMenuVisible.value = !isMenuVisible.value;
 }
 const hideSelectMenu = () => {
   isMenuVisible.value = false;
@@ -107,6 +113,9 @@ const value = computed({
 onMounted(() => {
   if(props.modelValue) {
     selectedItem.value = props.items.find(item => props.modelValue === item[props.itemValue]);
+  } else if (props.mandatory) {
+    selectedItem.value = props.items?.length > 0 ? props.items[0] : null;
+    value.value = selectedItem.value[props.itemValue];
   }
 });
 </script>

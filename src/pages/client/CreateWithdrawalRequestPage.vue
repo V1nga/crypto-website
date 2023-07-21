@@ -32,6 +32,7 @@
                                     <div class="mb-4">
                                         <FSelect
                                             v-model="withdrawTypeCard"
+                                            mandatory
                                             label="Выберите способ вывода"
                                             :items="[{ text: 'На карту VISA / Mastercard', value: 'visa/mastercard' }]"
                                         >
@@ -78,11 +79,13 @@
                                 <div class="flex flex-col gap-y-5">
                                     <FSelect
                                         v-model="cryptoCurrencyType"
+                                        mandatory
                                         label="Криптовалюта"
                                         :items="[{ text: 'Bitcoin BTC', value: 'bitcoin' }]"
                                     />
                                     <FSelect
                                         v-model="cryptoRurrencyNetwork"
+                                        mandatory
                                         label="Сеть"
                                         :items="[{ text: 'BNB Chain (BEP-20)', value: 'bnb-chain' }]"
                                     />
@@ -155,9 +158,9 @@ import FMessageBox from '../../components/kit/FMessageBox.vue';
 import FSelect from '../../components/kit/FSelect.vue';
 
 const withdrawType = ref('fiat');
-const withdrawTypeCard = ref('visa/mastercard');
-const cryptoCurrencyType = ref('bitcoin');
-const cryptoRurrencyNetwork = ref('bnb-chain');
+const withdrawTypeCard = ref(null);
+const cryptoCurrencyType = ref(null);
+const cryptoRurrencyNetwork = ref(null);
 
 const submitMessageBoxVisible = ref(false);
 const onClickSubmit = () => {

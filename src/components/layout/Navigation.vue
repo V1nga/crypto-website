@@ -4,7 +4,7 @@
 
         <div class="pt-6">
             <FButton
-                v-for="(item, index) of navigationItems"
+                v-for="(item, index) of adminNavigationItems"
                 :key="index"
                 :active="$route.path === item.path"
                 fill
@@ -40,6 +40,17 @@ const navigationItems = [
     { text: 'Выйти', logo: 'logout', path: '/logout'  }
 ];
 
+const adminNavigationItems = [
+    { text: 'Главная', logo: 'home', path: '/admin' },
+    { text: 'Карты', logo: 'cards', path: '/admin/cards'  },
+    { text: 'Транзакции', logo: 'transaction', path: '/admin/transactions'  },
+    { text: 'Вывод средств', logo: 'wallet', path: '/admin/withdraw-money'  },
+    { text: 'Проблемные платежи', logo: 'warning', path: '/problematic-payments'  },    
+    { text: 'Пользователи', logo: 'persons', path: '/users'  },
+    { text: 'Платежные решения', logo: 'noun-bulb-money', path: '/payment-solutions'  },
+    { text: 'Настройки', logo: 'cog', path: '/settings'  },
+    { text: 'Выйти', logo: 'logout', path: '/logout'  }
+];
 
 const router = useRouter();
 const onClickNav = (navigationItem) => {

@@ -20,9 +20,9 @@
                 </FTextField>
                 <div class="flex-grow justify-end flex gap-4">
                     <FSelect
-                        :max-width="170"                    
-                        :items="[{ text: 'Статус', value: 'status' }]"
-                        modelValue="status"
+                        :max-width="200"                    
+                        :items="[{ text: 'На рассмотрении', value: 'pending' }, { text: 'Отклонен', value: 'canceled' }, { text: 'Одобрен', value: 'success' }]"
+                        placeholder="Статус"
                         class="flex-grow"
                     />
                     <FDatePicker
