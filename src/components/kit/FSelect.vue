@@ -15,21 +15,26 @@
         <template #default>
             <div
                 v-click-out-side="hideSelectMenu"
-                class="p-2 cursor-pointer border-2 border-primary-light rounded-xl flex bg-white"
-                :class="{ 'border-primary': isMenuVisible }"
                 @click="toggleShowSelectMenu"
             >
-                <div class="pl-1 w-full whitespace-nowrap text-left" :class="`text-${ textSize } font-${ fontSize }`">
-                  <template v-if="selectedItem">
-                    <slot name="selected-item" :item="selectedItem">
-                      {{ selectedItem[itemTitle] }}
-                    </slot>
-                  </template>
-                  <template v-else>
-                    {{ placeholder ?? 'Выберите' }}
-                  </template>
+              <slot name="input" :is-menu-visible="isMenuVisible" :item="selectedItem">
+                <div
+                  class="p-2 cursor-pointer border-2 border-primary-light rounded-xl flex bg-white"
+                  :class="{ 'border-primary': isMenuVisible }"
+                >
+                  <div class="pl-1 w-full whitespace-nowrap text-left" :class="`text-${ textSize } font-${ fontSize }`">
+                    <template v-if="selectedItem">
+                      <slot name="selected-item" :item="selectedItem">
+                        {{ selectedItem[itemTitle] }}
+                      </slot>
+                    </template>
+                    <template v-else>
+                      {{ placeholder ?? 'Выберите' }}
+                    </template>
+                  </div>
+                  <FIcon :icon="isMenuVisible ? 'arrow-down-primary' : 'arrow-down-secondary'" class="mx-2"/>
                 </div>
-               <FIcon :icon="isMenuVisible ? 'arrow-down-primary' : 'arrow-down-secondary'" class="mx-2"/>
+              </slot>
             </div>
             <div
               v-show="isMenuVisible"

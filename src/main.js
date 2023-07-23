@@ -17,6 +17,8 @@ import ProblematicPaymentsAdminPage from './pages/admin/ProblematicPaymentsAdmin
 import UsersAdminPage from './pages/admin/UsersAdminPage.vue';
 import UserInfoAdminPage from './pages/admin/UserInfoAdminPage.vue';
 import PaymentSolutionsAdminPage from './pages/admin/PaymentSolutionsAdminPage.vue';
+import CardsAdminPage from './pages/admin/CardsAdminPage.vue';
+import CardsGatewayInfoAdminPage from './pages/admin/CardsGatewayInfoAdminPage.vue';
 
 const routes = [
     { path: '/', component: HomePage },
@@ -32,7 +34,9 @@ const routes = [
     { path: '/admin/problematic-payments', component: ProblematicPaymentsAdminPage },
     { path: '/admin/users', component: UsersAdminPage },
     { path: '/admin/users/:id', component: UserInfoAdminPage },
-    { path: '/admin/payment-solutions', component: PaymentSolutionsAdminPage }
+    { path: '/admin/payment-solutions', component: PaymentSolutionsAdminPage },
+    { path: '/admin/cards', component: CardsAdminPage },
+    { path: '/admin/cards/gateway/:id', component: CardsGatewayInfoAdminPage }
 ];
 
 const router = createRouter({

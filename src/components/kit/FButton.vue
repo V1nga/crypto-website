@@ -6,9 +6,9 @@
         @mouseleave="onMouseLeave"
     >
         <div class="flex flex-nowrap whitespace-nowrap" :class="buttonContentClasses">
-            <slot name="prepend" :isMouseOver="isMouseOver" :isActive="active"/>
-            <slot :isMouseOver="isMouseOver" :isActive="active">{{ text }}</slot>
-            <slot name="append" :isMouseOver="isMouseOver"/>
+            <slot name="prepend" :is-mouse-over="isMouseOver" :is-active="active"/>
+            <slot :is-mouse-over="isMouseOver" :is-active="active">{{ text }}</slot>
+            <slot name="append" :is-mouse-over="isMouseOver"/>
         </div>
     </button>
 </template>
