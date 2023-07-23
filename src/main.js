@@ -15,6 +15,7 @@ import TransactionAdminPage from './pages/admin/TransactionAdminPage.vue';
 import WithdrawMoneyAdminPage from './pages/admin/WithdrawMoneyAdminPage.vue';
 import ProblematicPaymentsAdminPage from './pages/admin/ProblematicPaymentsAdminPage.vue';
 import UsersAdminPage from './pages/admin/UsersAdminPage.vue';
+import UserInfoAdminPage from './pages/admin/UserInfoAdminPage.vue';
 
 const routes = [
     { path: '/', component: HomePage },
@@ -29,6 +30,7 @@ const routes = [
     { path: '/admin/withdraw-money', component: WithdrawMoneyAdminPage },
     { path: '/admin/problematic-payments', component: ProblematicPaymentsAdminPage },
     { path: '/admin/users', component: UsersAdminPage },
+    { path: '/admin/users/:id', component: UserInfoAdminPage }
 ];
 
 const router = createRouter({

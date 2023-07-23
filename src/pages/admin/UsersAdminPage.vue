@@ -50,7 +50,7 @@
                     </template>
                     <template #item-edit="{ item }">
                         <div class="text-right pr-8">
-                            <FArrowButton secondary @click="openDialog(item)"/>
+                            <FArrowButton secondary @click="$router.push(`${ $route.path }/${ item.id }`)"/>
                         </div>
                     </template>
                 </FTable>

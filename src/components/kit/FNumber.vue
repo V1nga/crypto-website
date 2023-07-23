@@ -8,10 +8,14 @@ const props = defineProps({
     number: {
         type: Number,
         required: true
+    },
+    minimumFractionDigits: {
+        type: Number,
+        default: 0
     }
 });
 
 const sum = computed(() => {
-    return new Intl.NumberFormat('en-US').format(props.number);
+    return new Intl.NumberFormat('en-US', { minimumFractionDigits: props.minimumFractionDigits }).format(props.number);
 });
 </script>

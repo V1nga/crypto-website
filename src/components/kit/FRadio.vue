@@ -1,6 +1,6 @@
 <template>
     <div class="grid grid-cols-2 grid-cols-[min-content_1fr] gap-y-5">
-        <div class="cursor-pointer pr-4" @click="model = value">
+        <div class="cursor-pointer flex items-center" @click="model = value">
             <input
                 v-model="model"
                 :value="value"
@@ -9,16 +9,16 @@
                 class="w-4 h-4 appearance-none rounded-full border-gray-light border-[2px] checked:border-[6px] checked:border-primary"
             />
         </div>
-        <div class="font-bold cursor-pointer" @click="model = value">
-            <slot>{{ text }}</slot>
+        <div class="cursor-pointer" @click="model = value">
+            <slot>
+                <div class="font-bold ml-4">{{ text }}</div>
+            </slot>
         </div>
-        <div class="col-start-2">
-            <Transition>
-                <div v-if="model === value">
-                    <slot name="hideable-content"/>
-                </div>
-            </Transition> 
-        </div>
+        <Transition>
+            <div v-if="model === value" class="col-start-2">
+                <slot name="hideable-content"/>
+            </div>
+        </Transition> 
     </div>
 </template>
 <script setup>

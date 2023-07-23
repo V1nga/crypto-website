@@ -1,8 +1,7 @@
 <template>
     <button
         :disabled="disabled"
-        :class="buttonClasses"
-        class="px-4 py-2 font-bold rounded-xl outline-0"
+        :class="base ? null : buttonClasses"
         @mouseover="onMouseOver"
         @mouseleave="onMouseLeave"
     >
@@ -32,6 +31,9 @@ const props = defineProps({
     hoverTextColor: {
         type: String
     },
+    base: {
+        type: Boolean
+    },
     light: {
         type: Boolean,
         deafult: false
@@ -39,6 +41,9 @@ const props = defineProps({
     disabled: {
         type: Boolean,
         default: false
+    },
+    square: {
+        type: Boolean
     },
     fill: {
         type: Boolean
@@ -78,9 +83,11 @@ const buttonColor = computed(() => {
 });
 
 const buttonClasses = computed(() => [
+    'py-2 font-bold rounded-xl outline-0',
     props.fill ? 'w-full' : '',
     `bg-${ buttonColor.value.background }`,
-    `text-${ buttonColor.value.text }`
+    `text-${ buttonColor.value.text }`,
+    `px-${ props.square ? 3 : 4 }`
 ]);
 const buttonContentClasses = computed(() => [
     `place-content-${ props.contentAlign }`
