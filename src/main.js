@@ -1,4 +1,4 @@
-import { createApp } from 'vue';
+import { ref, computed, createApp } from 'vue';
 import { createRouter, createWebHashHistory } from 'vue-router';
 import './style.css';
 import VueDatePicker from '@vuepic/vue-datepicker';
@@ -43,6 +43,17 @@ const router = createRouter({
     history: createWebHashHistory(),
     routes
 });
+
+const scrollDisabled = ref(false);
+export const enableScroll = () => {
+    scrollDisabled.value = false;
+    document.documentElement.style.overflow = 'auto'
+};
+export const disableScroll = () => {
+    scrollDisabled.value = true;
+    document.documentElement.style.overflow = 'hidden';
+};
+export const scrollIsDisabled = computed(() => scrollDisabled.value);
 
 const app = createApp(App);
 

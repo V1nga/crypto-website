@@ -35,7 +35,7 @@ import { ref, computed, onMounted } from 'vue';
 import MakeSizeProps from '../../props/MakeSizeProps';
 import FMakeSize from './FMakeSize.vue';
 
-const emit = defineEmits(['update:modelValue']);
+const emit = defineEmits(['update:modelValue', 'change']);
 const props = defineProps({
     scroll: {
         type: Boolean
@@ -56,8 +56,7 @@ const props = defineProps({
     },
     ...MakeSizeProps,
     minHeight: {
-        type: [String, Number],
-        default: 300
+        type: [String, Number]
     }
 });
 
@@ -85,6 +84,7 @@ const value = computed({
   },
   set(value) {
     emit('update:modelValue', value);
+    emit('change', value);
   }
 });
 

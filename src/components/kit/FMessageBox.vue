@@ -22,6 +22,7 @@
 <script setup>
 import { ref, computed } from 'vue';
 import { clickOutSide as vClickOutSide } from '@mahdikhashan/vue3-click-outside';
+import { disableScroll, enableScroll } from '../../main.js';
 import FCard from './FCard.vue';
 import FCardTitle from './FCardTitle.vue';
 import FButton from './FButton.vue';
@@ -35,7 +36,7 @@ const props = defineProps({
         type: String
     },
     absolute: {
-        type: Boolean
+        type: Boolean,
     },
     width: {
         type: [String, Number],
@@ -51,6 +52,8 @@ const visible = computed({
             messageBoxLoaded.value = true;
         }, 100);
     }
+
+    props.modelValue ? disableScroll() : enableScroll();
 
     return props.modelValue;
   },

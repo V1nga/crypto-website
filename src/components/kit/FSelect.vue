@@ -60,7 +60,7 @@ import MakeSizeProps from '../../props/MakeSizeProps';
 import FInputBase from './FInputBase.vue';
 import FIcon from '../../components/kit/FIcon.vue';
 
-const emit = defineEmits(['update:modelValue']);
+const emit = defineEmits(['update:modelValue', 'change']);
 const props = defineProps({
     modelValue: {
         type: String
@@ -121,6 +121,7 @@ const value = computed({
   },
   set(value) {
     emit('update:modelValue', value);
+    emit('change', value);
   }
 });
 

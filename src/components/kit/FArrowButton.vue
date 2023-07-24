@@ -2,7 +2,7 @@
     <button
       :disabled="disabled"
       :class="buttonClasses"
-      class="font-bold"
+      class="font-bold min-w-[32px] min-h-[32px]"
       @mouseover="onMouseOver"
       @mouseleave="onMouseLeave"
     >

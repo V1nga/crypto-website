@@ -14,7 +14,7 @@
 <script setup>
 import { ref, computed, onMounted } from "vue";
 
-const emit = defineEmits(['update:modelValue']);
+const emit = defineEmits(['update:modelValue', 'change']);
 const props = defineProps({
     modelValue: {
         type: Number
@@ -32,6 +32,7 @@ const value = computed({
   set(value) {
     selectedItem.value = value;
     emit('update:modelValue', value);
+    emit('change', value);
   }
 });
 

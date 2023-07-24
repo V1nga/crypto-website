@@ -10,5 +10,4 @@
 </template>
 <script setup>
 import Navigation from './components/layout/Navigation.vue';
-// import HomePage from './pages/client/HomePage.vue';
 </script>
