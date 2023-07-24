@@ -7,7 +7,7 @@
         :max-width="maxWidth"
         :max-height="maxHeight"
         
-        class="filter drop-shadow-xl"
+        class="filter"
         :class="cardClasses"
     >
         <slot/>
@@ -30,12 +30,16 @@ const props = defineProps({
     noPaddings: {
         type: Boolean
     },
+    noShadowsMobile: {
+        type: Boolean
+    },
     ...MakeSizeProps
 });
 
 const cardClasses = computed(() => [
     `bg-${ props.color }`,
     `rounded-${ props.rounded}`,
-    props.noPaddings ? '' : 'p-4'
+    props.noPaddings ? '' : 'p-4',
+    props.noShadowsMobile ? 'drop-shadow-none sm:drop-shadow-xl' : 'drop-shadow-xl'
 ]);
 </script>
