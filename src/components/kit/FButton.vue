@@ -87,7 +87,8 @@ const buttonClasses = computed(() => [
     props.fill ? 'w-full' : '',
     `bg-${ buttonColor.value.background }`,
     `text-${ buttonColor.value.text }`,
-    `px-${ props.square ? 3 : 4 }`
+    `px-${ props.square ? 3 : 4 }`,
+    props.square ? 'min-w-[44px] min-h-[40px]' : ''
 ]);
 const buttonContentClasses = computed(() => [
     `place-content-${ props.contentAlign }`
