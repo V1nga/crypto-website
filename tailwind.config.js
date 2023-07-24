@@ -31,7 +31,10 @@ export default {
         DEFAULT: '#425EFF',
         dark: '#2B48F0'
       },
-      secondary: '#6A6E85',
+      secondary: {
+        light: '#D8D8D8',
+        default: '#6A6E85'
+      },
       warning: {
         light: '#FDECD1',
         DEFAULT: '#F79E1B'

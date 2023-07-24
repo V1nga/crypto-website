@@ -19,7 +19,7 @@
             >
               <slot name="input" :is-menu-visible="isMenuVisible" :item="selectedItem">
                 <div
-                  class="p-2 cursor-pointer border-2 border-primary-light rounded-xl flex bg-white"
+                  class="p-2 cursor-pointer border-[1px] border-secondary-light rounded-xl flex bg-white"
                   :class="{ 'border-primary': isMenuVisible }"
                 >
                   <div class="pl-1 w-full whitespace-nowrap text-left" :class="`text-${ textSize } font-${ fontSize }`">

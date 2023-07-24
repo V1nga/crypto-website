@@ -14,11 +14,11 @@
         <template #default>
             <VueDatePicker v-model="value" :range="range" :partial-range="false">
                 <template #trigger>
-                    <div class="cursor-pointer border-2 border-primary-light rounded-xl px-3 py-2 flex flex-nowrap gap-x-3 bg-white">
+                    <div class="cursor-pointer border-[1px] border-secondary-light rounded-xl px-3 py-2 flex flex-nowrap gap-x-3 bg-white">
                         <FIcon icon="calendar"/>
                         <div class="font-semibold">
                           <template v-if="range">
-                              {{ value ? `${ new Date(value[0]).toLocaleDateString("ru-RU") } - ${ new Date(value[1]).toLocaleDateString("ru-RU") }` : 'Диапазон дат' }}
+                              {{ value ? `${ new Date(value[0]).toLocaleDateString("ru-RU") } - ${ new Date(value[1]).toLocaleDateString("ru-RU") }` : 'Выберите даты' }}
                           </template>
                           <template v-else>
                               {{ value ? new Date(value).toLocaleDateString("ru-RU") : 'Дата' }}

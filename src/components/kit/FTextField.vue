@@ -15,7 +15,7 @@
         <template #default>
             <div
                 class="border-2 rounded-xl px-1 py-2 flex bg-white"
-                :class="outlined ? 'border-primary-light' : 'border-white filter drop-shadow-xl'"
+                :class="outlined ? 'border-[1px] border-secondary-light' : 'border-white filter drop-shadow-xl'"
             >
                 <slot name="prepend"/>
                 <input

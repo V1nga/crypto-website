@@ -12,7 +12,7 @@
           <slot name="label"/>
         </template>
         <template #default>
-            <div class="border-2 border-primary-light rounded-xl px-1 py-2 flex bg-white">
+            <div class="border-[1px] border-secondary-light rounded-xl px-1 py-2 flex bg-white">
                 <textarea
                     v-model="value"
                     cols="40"

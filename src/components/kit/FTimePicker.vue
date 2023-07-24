@@ -14,7 +14,7 @@
         <template #default>
             <VueDatePicker v-model="value" time-picker>
                 <template #trigger>
-                    <div class="cursor-pointer border-2 border-primary-light rounded-xl px-3 py-2 flex flex-nowrap gap-x-3 bg-white">
+                    <div class="cursor-pointer border-[1px] border-secondary-light rounded-xl px-3 py-2 flex flex-nowrap gap-x-3 bg-white">
                         <FIcon icon="clock"/>
                         <div class="font-semibold">
                           {{ value ? `${ value.hours }:${ value.minutes }` : '--:--' }}
