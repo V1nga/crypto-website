@@ -1,8 +1,14 @@
 <template>
     <FPage title="Транзакции">
         <template #title-append>
-            <div class="w-full flex justify-end">
-                <FTextField v-model="searchText" :max-width="410" outlined placeholder="Искать по ID транзакции или ID клиента" class="w-4/12 lg:w-3/12">
+            <div class="flex-grow flex justify-end">
+                <FTextField
+                    v-model="searchText"
+                    :min-width="230"
+                    outlined
+                    placeholder="Искать по ID транзакции или ID клиента"
+                    class="w-full lg:w-[410px]"
+                >
                     <template #prepend>
                         <FIcon icon="search" class="mx-2"/>
                     </template>
@@ -10,7 +16,7 @@
             </div>
         </template>
         <template #default>
-            <FCard no-paddings>
+            <FCard no-paddings no-shadows-mobile>
                 <FTable :headers="transactionsHeaders" :items="transactionsItems">
                     <template #item-status="{ item }">
                         <div>
@@ -22,6 +28,25 @@
                         <div class="text-right pr-8">
                             <FArrowButton secondary @click="openDialog(item)"/>
                         </div>
+                    </template>
+                    <template #mobile-item="{ item }">
+                        <div class="flex flex-nowrap p-4">
+                            <div>
+                                <p class="mb-2 font-semibold">{{ item.id  }}</p>
+                                <FChip v-bind:[item.statusColor]=true>{{ item.status }}</FChip>
+                            </div>
+                            <div class="flex-grow flex flex-nowrap justify-end">
+                                <div>
+                                    <p class="mb-1 text-right font-semibold">{{ item.sum }}</p>
+                                    <div class="font-semibold flex flex-nowrap gap-2">
+                                        <span>На карту</span>
+                                        <span>*{{ item.requisites && item.requisites.split(' ')[3] }}</span>
+                                        <FIcon :icon="item.cardIssuer"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <FDivider/>
                     </template>
                 </FTable>
             </FCard>
@@ -63,6 +88,7 @@ import FChip from '../../components/kit/FChip.vue';
 import FArrowButton from '../../components/kit/FArrowButton.vue';
 import TransactionDialog from '../../components/layout/TransactionDialog.vue';
 import FIcon from '../../components/kit/FIcon.vue';
+import FDivider from '../../components/kit/FDivider.vue';
 
 const searchText = ref(null);
 

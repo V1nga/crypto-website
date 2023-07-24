@@ -1,27 +1,28 @@
 <template>
     <FPage>
         <template #title-prepend>
-            <FTabs
-                v-model="tab"
-                :items="['Карты', 'Сим-Шлюз']"
-            />
-        </template>
-        <template v-if="tab === 1" #title-append>
-            <div class="w-full flex justify-end">
-                <FTextField
-                    :width="270"
-                    outlined
-                    placeholder="Искать по названию шлюза"
-                >
-                    <template #prepend>
-                        <FIcon icon="search" class="ml-2"/>
-                    </template>
-                </FTextField>
+            <div class="w-full flex flex-wrap gap-4">
+                <FTabs
+                    v-model="tab"
+                    :items="['Карты', 'Сим-Шлюз']"
+                />
+                <div v-if="tab === 1" class="flex-grow flex md:justify-end">
+                    <FTextField
+                        :min-width="270"
+                        outlined
+                        placeholder="Искать по названию шлюза"
+                        class="w-full md:w-[270px]"
+                    >
+                        <template #prepend>
+                            <FIcon icon="search"/>
+                        </template>
+                    </FTextField>
+                </div>
             </div>
         </template>
         <template #default>
-            <FCard v-if="tab === 0" class="p-6 h-full flex flex-nowrap gap-x-12">
-                <div class="mb-12 w-[400px] flex flex-col gap-4">
+            <FCard v-if="tab === 0" class="p-0 xl:p-6 h-full flex flex-wrap 2xl:flex-nowrap gap-x-12">
+                <div class="p-6 xl:p-0 xl:mb-4 2xl:mb-12 w-full 2xl:w-[400px] flex flex-col gap-4">
                     <FButton light fill @click="addCardMessageBoxOpen">
                         <FIcon icon="plus-primary" class="mr-3"/>
                         Добавить карты
@@ -38,7 +39,7 @@
                             <template #item="{ item, isSelected }">
                                 <div
                                     :class="[{ 'text-secondary': !isSelected }, { 'text-primary': isSelected }, { 'bg-primary-light': isSelected }]"
-                                    class="p-3 rounded-xl flex flex-nowrap gap-x-4"
+                                    class="p-3 rounded-xl whitespace-nowrap flex flex-nowrap justify-center gap-x-4"
                                 >
                                     <FIcon :icon="isSelected ? 'card-primary' : 'card'"/>
                                     {{ item.cardNumber }}
@@ -51,17 +52,17 @@
                     </div>
                 </div>
                 <FCard v-if="selectedCard" no-paddings class="relative w-full">
-                    <div class="p-6 pb-24 bg-active font-bold grid grid-cols-5 gap-4">
-                        <div class="col-span-2">
-                            <p class="text-sm">Номер карты</p>
+                    <div class="p-6 pb-24 bg-active font-bold grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 3xl:grid-cols-5 gap-4">
+                        <div class="3xl:col-span-2">
+                            <p class="text-sm whitespace-nowrap">Номер карты</p>
                             <p>{{ selectedCard }}</p>
                         </div>
                         <div>
-                            <p class="text-sm">Дата создания</p>
+                            <p class="text-sm whitespace-nowrap">Дата создания</p>
                             <p>12.12.2023</p>
                         </div>
-                        <div class="col-span-2">
-                            <p class="text-sm">Сим-шлюз</p>
+                        <div class="3xl:col-span-2">
+                            <p class="text-sm whitespace-nowrap">Сим-шлюз</p>
                             <FSelect
                                 :items="[
                                     { text: 'Value 1', value: 'value-1' },
@@ -79,23 +80,23 @@
                             </FSelect>
                         </div>
                         <div>
-                            <p class="text-sm">Сумма</p>
+                            <p class="text-sm whitespace-nowrap">Сумма</p>
                             <FMoney :money="3346" currency="USD" text-size="2xl" slug-text-size="md"/>
                         </div>
                         <div>
-                            <p class="text-sm">Попыток пополнения</p>
+                            <p class="text-sm whitespace-nowrap">Попыток пополнения</p>
                             <FNumber :number="3346" class="text-xl text-primary"/>
                         </div>
                         <div>
-                            <p class="text-sm">Успешных попыток</p>
+                            <p class="text-sm whitespace-nowrap">Успешных попыток</p>
                             <FNumber :number="2345" class="text-xl text-success"/>
                         </div>
                         <div>
-                            <p class="text-sm">Не успешных попыток</p>
+                            <p class="text-sm whitespace-nowrap">Не успешных попыток</p>
                             <FNumber :number="1345" class="text-xl text-danger"/>
                         </div>
                         <div>
-                            <p class="text-sm mb-1">Статус карты</p>
+                            <p class="mb-1 text-sm whitespace-nowrap">Статус карты</p>
                             <FChip success class="py-[2px]">Активная</FChip>
                         </div>
                     </div>
@@ -122,18 +123,6 @@
                         </FButton>
                     </div>
                 </FCard>
-                <FMessageBox
-                    v-model="addCardMessageBoxVisible"
-                    title="Добавить карту (-ы)"
-                >
-                    <div class="flex flex-col gap-4">
-                        <FSelect
-                            label="Платёжное решение"
-                            placeholder="Выбрать платежное решение"
-                        />
-                        <FTextArea label="Номера карт" placeholder="Напишите одну или несколько номеров карт..."/>
-                    </div>
-                </FMessageBox>
             </FCard>
             <FCard v-else no-paddings>
                 <FTable
@@ -150,6 +139,18 @@
                     </template>
                 </FTable>
             </FCard>
+            <FMessageBox
+                v-model="addCardMessageBoxVisible"
+                title="Добавить карту (-ы)"
+            >
+                <div class="flex flex-col gap-4">
+                    <FSelect
+                        label="Платёжное решение"
+                        placeholder="Выбрать платежное решение"
+                    />
+                    <FTextArea label="Номера карт" placeholder="Напишите одну или несколько номеров карт..."/>
+                </div>
+            </FMessageBox>
         </template>
     </FPage>
 </template>
@@ -182,23 +183,6 @@ const addCardMessageBoxOpen = () => {
 const addedCards = ref([
     { cardNumber: '2345 3456 5678 5678', cardIssuer: 'visa' },
     { cardNumber: '2345 3456 5678 5671', cardIssuer: 'visa' },
-    { cardNumber: '2345 3456 5678 5672', cardIssuer: 'visa' },
-    { cardNumber: '2345 3456 5678 5673', cardIssuer: 'visa' },
-    { cardNumber: '2345 3456 5678 5674', cardIssuer: 'mastercard' },
-    { cardNumber: '2345 3456 5678 5675', cardIssuer: 'mastercard' },
-    { cardNumber: '2345 3456 5678 5676', cardIssuer: 'mastercard' },
-    { cardNumber: '2345 3456 5678 5677', cardIssuer: 'mastercard' },
-    { cardNumber: '2345 3456 5678 5679', cardIssuer: 'mastercard' },
-    { cardNumber: '2345 3456 5678 5618', cardIssuer: 'mastercard' },
-    { cardNumber: '2345 3456 5678 5628', cardIssuer: 'mastercard' },
-    { cardNumber: '2345 3456 5678 5638', cardIssuer: 'mastercard' },
-    { cardNumber: '2345 3456 5678 5648', cardIssuer: 'mastercard' },
-    { cardNumber: '2345 3456 5678 5658', cardIssuer: 'mastercard' },
-    { cardNumber: '2345 3456 5678 5668', cardIssuer: 'mastercard' },
-    { cardNumber: '2345 3456 5678 5178', cardIssuer: 'mastercard' },
-    { cardNumber: '2345 3456 5678 5278', cardIssuer: 'mastercard' },
-    { cardNumber: '2345 3456 5678 5378', cardIssuer: 'mastercard' },
-    { cardNumber: '2345 3456 5678 5478', cardIssuer: 'mastercard' },
     { cardNumber: '2345 3456 5678 5578', cardIssuer: 'mastercard' }
 ]);
 

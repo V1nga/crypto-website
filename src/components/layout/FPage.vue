@@ -1,14 +1,22 @@
 <template>
     <div>
-        <div v-if="title || $slots.title || $slots['title-prepend'] || $slots['title-append']" class="flex flex-nowrap items-center bg-white px-7 py-4 filter drop-shadow">
-            <slot name="title-prepend"/>
-            <div v-if="title || $slots.title" class="font-bold text-xl my-2 whitespace-nowrap">
-                <slot name="title">{{ title }}</slot>       
+        <div class="px-7 py-4 bg-white sm:filter sm:drop-shadow">
+            <div
+                v-if="title || $slots.title || $slots['title-prepend'] || $slots['title-append']"
+                class="flex flex-wrap md:flex-nowrap items-center gap-4"
+            >
+                <slot name="title-prepend"/>
+                <div v-if="title || $slots.title" class="font-bold text-xl my-2 whitespace-nowrap">
+                    <slot name="title">{{ title }}</slot>       
+                </div>
+                <slot name="title-append"/>
             </div>
-            <slot name="title-append"/>
+            <div  v-if="$slots['title-footer']">
+                <slot name="title-footer"/>
+            </div>
         </div>
         <div class="h-full flex flex-col">
-            <div class="p-6 2xl:p-10 grid grid-cols-1">
+            <div class="sm:p-6 2xl:p-10 grid grid-cols-1">
                 <slot/>
             </div>
             <div class="order-first">

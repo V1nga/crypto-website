@@ -1,15 +1,17 @@
 <template>
     <FPage title="Платёжные решения">
         <template #title-append>
-            <div class="w-full flex justify-end">
-                <FButton @click="createPaymentSolutionMessageBoxOpen">
-                    <FIcon icon="plus" class="mr-3"/>
-                    Создать группу
+            <div class="flex-grow flex justify-end">
+                <FButton square @click="createPaymentSolutionMessageBoxOpen">
+                    <div class="py-1 lg:py-0 flex flex-nowrap gap-3">
+                        <FIcon icon="plus"/>
+                        <span class="hidden lg:block">Создать группу</span>
+                    </div>
                 </FButton>
             </div>
         </template>
         <template #default>
-            <FCard>
+            <FCard no-paddings>
                 <FTable
                     :headers="paymentSolutionsHeaders"
                     :items="paymentSolutionsItems"
@@ -148,11 +150,11 @@ const createRequisitesMessageBoxOpen = () => {
     createRequisitesMessageBoxVisible.value = true;
 }
 const requisitesItems = ref([
-    { cardNumber: '3434 4343 4344 3434', cardIssuer: 'visa', money: '3456.09', currency: 'USD' },
-    { cardNumber: '2323 2323 2323 4567', cardIssuer: 'visa', money: '3456.09', currency: 'USD' },
-    { cardNumber: '2323 2323 2323 4567', cardIssuer: 'mastercard', money: '456.09', currency: 'USD' },
-    { cardNumber: '2323 2323 2323 4567', cardIssuer: 'visa', money: '3456.09', currency: 'EUR' },
-    { cardNumber: '2323 2323 2323 4567', cardIssuer: 'visa', money: '3456.09', currency: 'EUR' },
+    { cardNumber: '3434 4343 4344 3434', cardIssuer: 'visa', money: 3456.09, currency: 'USD' },
+    { cardNumber: '2323 2323 2323 4567', cardIssuer: 'visa', money: 3456.09, currency: 'USD' },
+    { cardNumber: '2323 2323 2323 4567', cardIssuer: 'mastercard', money: 456.09, currency: 'USD' },
+    { cardNumber: '2323 2323 2323 4567', cardIssuer: 'visa', money: 3456.09, currency: 'EUR' },
+    { cardNumber: '2323 2323 2323 4567', cardIssuer: 'visa', money: 3456.09, currency: 'EUR' },
 ]);
 
 const paymentSolutionsHeaders = [

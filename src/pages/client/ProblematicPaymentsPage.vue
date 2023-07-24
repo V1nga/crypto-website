@@ -1,11 +1,11 @@
 <template>
     <FPage title="Диспуты">
         <template #title-append>
-            <div class="w-full flex justify-end gap-x-4">
-                <FButton light @click="isFiltersVisible = !isFiltersVisible">
+            <div class="flex-grow flex justify-end gap-x-4">
+                <FButton square light @click="isFiltersVisible = !isFiltersVisible">
                     <div class="flex flex-nowrap gap-x-2">
                         <FIcon icon="pyramid-down"/>
-                        <span>{{ isFiltersVisible ? 'Скрыть' : 'Показать' }} фильтр</span>
+                        <span class="hidden lg:block">{{ isFiltersVisible ? 'Скрыть' : 'Показать' }} фильтр</span>
                     </div>
                 </FButton>
                 <FButton color="danger" hover-color="danger-dark" @click="createDisputMessageboxVisible = true">Создать диспут</FButton>

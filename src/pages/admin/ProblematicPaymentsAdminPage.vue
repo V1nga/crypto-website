@@ -1,11 +1,11 @@
 <template>
     <FPage title="Диспуты">
         <template #title-append>
-            <div class="w-full flex justify-end gap-x-4">
-                <FButton light @click="isFiltersVisible = !isFiltersVisible">
-                    <div class="flex flex-nowrap gap-x-2">
+            <div class="flex-grow flex justify-end gap-x-4">
+                <FButton square light @click="isFiltersVisible = !isFiltersVisible">
+                    <div class="py-1 lg:py-0 flex flex-nowrap gap-x-2">
                         <FIcon icon="pyramid-down"/>
-                        <span>{{ isFiltersVisible ? 'Скрыть' : 'Показать' }} фильтр</span>
+                        <span class="hidden lg:block">{{ isFiltersVisible ? 'Скрыть' : 'Показать' }} фильтр</span>
                     </div>
                 </FButton>
             </div>
@@ -51,7 +51,7 @@
             </div>
         </template>
         <template #default>
-            <FCard no-paddings>
+            <FCard no-paddings no-shadows-mobile>
                 <FTable :headers="disputsHeaders" :items="disputsItems">
                     <template #item-requisites="{ item }">
                         <div class="flex flex-nowrap">
@@ -69,6 +69,25 @@
                         <div class="text-right pr-8">
                             <FArrowButton secondary @click="openDialog(item)"/>
                         </div>
+                    </template>
+                    <template #mobile-item="{ item }">
+                        <div class="flex flex-nowrap p-4">
+                            <div>
+                                <p class="mb-2 font-semibold">{{ item.id  }}</p>
+                                <FChip v-bind:[item.statusColor]=true>{{ item.status }}</FChip>
+                            </div>
+                            <div class="flex-grow flex flex-nowrap justify-end">
+                                <div>
+                                    <p class="mb-1 text-right font-semibold">{{ item.sum }}</p>
+                                    <div class="font-semibold flex flex-nowrap gap-2">
+                                        <span>{{ item.method }}</span>
+                                        <span>{{ item.requisites }}</span>
+                                        <FIcon :icon="item.cardIssuer"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <FDivider/>
                     </template>
                 </FTable>
             </FCard>
@@ -176,6 +195,7 @@ import TransactionDialog from '../../components/layout/TransactionDialog.vue';
 import FSelect from '../../components/kit/FSelect.vue';
 import FTimePicker from '../../components/kit/FTimePicker.vue';
 import FDatePicker from '../../components/kit/FDatePicker.vue';
+import FDivider from '../../components/kit/FDivider.vue';
 
 const dialogData = ref(null);
 const dialogVisible = ref(false);

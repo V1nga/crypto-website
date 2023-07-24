@@ -2,10 +2,13 @@
     <FPage>
         <template #body-prepend>
             <div class="py-6 bg-white filter drop-shadow-xl flex flex-col gap-4">
-                <div class="px-10 flex flex-nowrap gap-x-4">
+                <div class="px-10 flex flex-wrap lg:flex-nowrap gap-4">
                     <FArrowButton reverse active @click="$router.push('/admin/users')"/>
-                    <div class="flex-grow flex flex-nowrap gap-x-4 justify-end">
-                        <div v-if="user.blocked" class="px-2 font-semibold text-danger bg-danger-light rounded-xl flex flex-nowrap gap-x-2 items-center">
+                    <div class="flex-grow flex flex-nowrap gap-4 justify-end">
+                        <div
+                            v-if="user.blocked"
+                            class="p-2 whitespace-nowrap font-semibold text-danger bg-danger-light rounded-xl hidden lg:flex flex-nowrap gap-x-2 items-center"              
+                        >
                             <FIcon icon="danger"/>
                             Пользователь заблокирован
                         </div>
@@ -20,7 +23,14 @@
                         </FButton>
                     </div>
                 </div>
-                <div class="px-10 font-bold flex gap-x-16">
+                <div
+                    v-if="user.blocked"
+                    class="mx-10 p-2 whitespace-nowrap font-semibold text-danger bg-danger-light rounded-xl lg:hidden flex flex-nowrap gap-x-2 items-center"              
+                >
+                    <FIcon icon="danger"/>
+                    Пользователь заблокирован
+                </div>
+                <div class="px-10 font-bold grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
                     <div>
                         <p class="text-sm">Пользователь</p>
                         <p>{{ user.email  }}</p>
@@ -89,10 +99,10 @@
                         :items="['Транзакции', 'История входов']"
                     />
                     <div class="flex-grow flex flex-nowrap justify-end">
-                        <FButton light>
+                        <FButton square light>
                             <div class="flex flex-nowrap gap-x-2">
                                 <FIcon icon="pyramid-down"/>
-                                <span>Показать фильтр</span>
+                                <span class="hidden lg:block">Показать фильтр</span>
                             </div>
                         </FButton>
                     </div>

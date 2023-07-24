@@ -1,10 +1,10 @@
 <template>
-    <div class="bg-white px-5 py-6 filter drop-shadow-xl w-1/6 min-w-min z-50">
+    <div class="hidden md:block bg-white px-5 py-6 filter drop-shadow-xl w-1/6 min-w-min z-50">
         <img src="../../assets/logo.svg" alt="Finance logo" class="ml-3"/>
 
         <div class="pt-6">
             <FButton
-                v-for="(item, index) of adminNavigationItems"
+                v-for="(item, index) of navigationItems"
                 :key="index"
                 :active="$route.path === item.path"
                 fill
@@ -19,7 +19,7 @@
                     <FIcon :icon="`${ item.logo }${ isMouseOver || isActive ? '' : '-gray' }`" class="pr-4"/>
                 </template>
                 <template #default>
-                    <div class="text-sm font-semibold">{{ item.text }}</div>
+                    <div class="mr-4 text-sm font-semibold">{{ item.text }}</div>
                 </template>
             </FButton>
         </div>

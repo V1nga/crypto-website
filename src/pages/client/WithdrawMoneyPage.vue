@@ -1,12 +1,23 @@
 <template>
     <FPage title="Вывод средств">
         <template #title-append>
-            <div class="w-full flex justify-end">
-                <div class="flex flex-nowrap items-center mr-6">
-                    <div class="text-dark font-semibold mr-2">Доступно для вывода:</div>
+            <div class="flex-grow flex justify-end gap-2 xl:gap-6">
+                <div class="hidden lg:flex flex-nowrap items-center">
+                    <div class="whitespace-nowrap text-dark font-semibold mr-2">Доступно для вывода:</div>
                     <FMoney :money="12987.89" currency="USDT" text-size="2xl" slug-text-size="sm" font-weight="bold"/>
                 </div>
-                <FButton @click="$router.push('/create-withdrawal-requrest')">Подать заявку на вывод</FButton>
+                <FButton
+                    class="w-full md:w-min"
+                    @click="$router.push('/create-withdrawal-requrest')"
+                >
+                    Подать заявку на вывод
+                </FButton>
+            </div>
+        </template>
+        <template #title-footer>
+            <div class="mt-4 lg:hidden flex flex-nowrap items-center">
+                <div class="whitespace-nowrap text-dark font-semibold mr-2">Доступно для вывода:</div>
+                <FMoney :money="12987.89" currency="USDT" text-size="2xl" slug-text-size="sm" font-weight="bold"/>
             </div>
         </template>
         <template #default>

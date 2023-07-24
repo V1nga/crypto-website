@@ -14,8 +14,8 @@
                         >
                             <template #label>
                                 <div class="font-bold flex items-center whitespace-nowrap">
-                                    Сумма вывода
-                                    <div class="w-full flex flex-nowrap items-center justify-end">
+                                    <div class="hidden md:block">Сумма вывода</div>
+                                    <div class="flex-grow flex flex-nowrap items-center md:justify-end">
                                         Доступно для вывода:
                                         <FMoney :money="12987.89" currency="USDT" text-size="lg" slug-text-size="lg" class="ml-2"/>
                                     </div>

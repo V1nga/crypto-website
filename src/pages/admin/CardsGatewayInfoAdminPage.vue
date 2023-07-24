@@ -6,23 +6,28 @@
                     <FArrowButton reverse active class="my-1 mr-5" @click="$router.push('/admin/cards')"/>
                     <div class="text-lg font-bold">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
                 </div>
-                <div class="flex gap-4">
+                <div class="flex flex-wrap gap-4">
                     <div class="flex-grow">
-                        <FTextField :max-width="330" outlined placeholder="Искать по тексту">
+                        <FTextField
+                            :min-width="330"
+                            outlined
+                            placeholder="Искать по тексту"
+                            class="w-full lg:w-[330px]"
+                        >
                             <template #prepend>
                                 <FIcon icon="search" class="ml-2"/>
                             </template>
                         </FTextField>
                     </div>
-                    <div class="flex justify-end gap-4">
-                        <FDatePicker :width="240"/>
-                        <FTimePicker :width="180"/>
+                    <div class="flex-grow lg:flex-grow-0 flex flex-nowrap lg:justify-end gap-4">
+                        <FDatePicker class="w-full lg:w-[240px]"/>
+                        <FTimePicker class="w-full lg:w-[180px]"/>
                     </div>
                 </div>
             </div>
         </template>
         <template #default>
-            <div class="grid grid-cols-3 gap-8">
+            <div class="grid lg:grid-cols-2 xl:grid-cols-3 gap-8">
                 <FCard
                     v-for="(item, index) of items"
                     :key="index"
