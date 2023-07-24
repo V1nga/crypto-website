@@ -4,7 +4,7 @@
 
         <div class="pt-6">
             <FButton
-                v-for="(item, index) of navigationItems"
+                v-for="(item, index) of adminNavigationItems"
                 :key="index"
                 :active="$route.path === item.path"
                 fill

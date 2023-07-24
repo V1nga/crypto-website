@@ -12,7 +12,7 @@
             </div>
         </template>
         <template #body-prepend>            
-            <div v-show="isFiltersVisible" class="px-7 pb-4 flex gap-4 bg-white filter drop-shadow-lg">
+            <Filters v-model="isFiltersVisible">
                 <FTextField :max-width="330" outlined placeholder="Искать по ID транзакции" class="flex-grow">
                     <template #prepend>
                         <FIcon icon="search" class="ml-1"/>
@@ -37,7 +37,7 @@
                         class="flex-grow"
                     />                  
                 </div>
-            </div>
+            </Filters>
         </template>
         <template #default>
             <FCard no-paddings>
@@ -190,6 +190,7 @@ import TransactionDialog from '../../components/layout/TransactionDialog.vue';
 import FSelect from '../../components/kit/FSelect.vue';
 import FTimePicker from '../../components/kit/FTimePicker.vue';
 import FDatePicker from '../../components/kit/FDatePicker.vue';
+import Filters from '../../components/layout/Filters.vue';
 
 const dialogData = ref(null);
 const dialogVisible = ref(false);

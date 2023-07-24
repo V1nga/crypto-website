@@ -2,7 +2,7 @@
     <FPage>
         <template #body-prepend>
             <div class="py-6 bg-white filter drop-shadow-xl flex flex-col gap-4">
-                <div class="px-10 flex flex-wrap lg:flex-nowrap gap-4">
+                <div class="px-5 md:px-10 flex flex-wrap lg:flex-nowrap gap-4">
                     <FArrowButton reverse active @click="$router.push('/admin/users')"/>
                     <div class="flex-grow flex flex-nowrap gap-4 justify-end">
                         <div
@@ -25,12 +25,12 @@
                 </div>
                 <div
                     v-if="user.blocked"
-                    class="mx-10 p-2 whitespace-nowrap font-semibold text-danger bg-danger-light rounded-xl lg:hidden flex flex-nowrap gap-x-2 items-center"              
+                    class="mx-5 p-2 whitespace-nowrap font-semibold text-danger bg-danger-light rounded-xl lg:hidden flex flex-nowrap gap-x-2 items-center"              
                 >
                     <FIcon icon="danger"/>
                     Пользователь заблокирован
                 </div>
-                <div class="px-10 font-bold grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
+                <div class="px-5 md:px-10 font-bold grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
                     <div>
                         <p class="text-sm">Пользователь</p>
                         <p>{{ user.email  }}</p>
@@ -93,7 +93,7 @@
                     </div>
                 </div>
                 <FDivider/>
-                <div class="px-10 flex flex-nowrap gap-x-4">
+                <div class="px-5 md:px-10 flex flex-nowrap gap-x-2 md:gap-x-4">
                     <FTabs
                         v-model="tab"
                         :items="['Транзакции', 'История входов']"

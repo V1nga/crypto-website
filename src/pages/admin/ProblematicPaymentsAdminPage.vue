@@ -11,44 +11,60 @@
             </div>
         </template>
         <template #body-prepend>            
-            <div v-show="isFiltersVisible" class="px-7 pb-4 flex flex-wrap gap-4 bg-white filter drop-shadow-lg">
-                <div class="border-[1px] border-primary-light w-full"/>
-                <FTextField outlined placeholder="Искать по ID, реквизитам или email" width="100%">
-                    <template #prepend>
-                        <FIcon icon="search" class="ml-1"/>
-                    </template>
-                </FTextField>
-                <FSelect
-                    :max-width="200"                    
-                    :items="[{ text: 'На рассмотрении', value: 'pending' }, { text: 'Отклонен', value: 'canceled' }, { text: 'Одобрен', value: 'success' }]"
-                    placeholder="Статус"
-                    class="flex-grow"
-                />
-                <FDatePicker
-                    v-model="datePickerValue"
-                    :max-width="280"
-                    range
-                    class="flex-grow"
-                />       
-                <FSelect
-                    :max-width="200"                    
-                    :items="[{ text: 'USDT', value: 'usdt' }]"
-                    placeholder="Валюта"
-                    class="flex-grow"
-                />
-                <FSelect
-                    :max-width="200"                    
-                    :items="[{ text: 'На карту', value: 'card' }]"
-                    placeholder="Метод оплаты"
-                    class="flex-grow"
-                />
-                <div class="flex-grow flex flex-nowrap items-center justify-end gap-x-2 text-dark font-semibold">
-                    Сумма от:
-                    <FTextField :max-width="90" outlined placeholder="00"/>
-                    до
-                    <FTextField :max-width="90" outlined placeholder="00"/>
-                </div>
-            </div>
+            <Filters v-model="isFiltersVisible">
+                <template #default>
+                    <div class="border-[1px] border-primary-light w-full"/>
+                    <FTextField outlined placeholder="Искать по ID, реквизитам или email" width="100%">
+                        <template #prepend>
+                            <FIcon icon="search" class="ml-1"/>
+                        </template>
+                    </FTextField>
+                    <FSelect
+                        :max-width="200"                    
+                        :items="[{ text: 'На рассмотрении', value: 'pending' }, { text: 'Отклонен', value: 'canceled' }, { text: 'Одобрен', value: 'success' }]"
+                        placeholder="Статус"
+                        class="flex-grow"
+                    />
+                    <FDatePicker
+                        v-model="datePickerValue"
+                        :max-width="280"
+                        range
+                        class="flex-grow"
+                    />
+                    <FSelect
+                        :max-width="200"                    
+                        :items="[{ text: 'USDT', value: 'usdt' }]"
+                        placeholder="Валюта"
+                        class="flex-grow"
+                    />
+                    <FSelect
+                        :max-width="200"                    
+                        :items="[{ text: 'На карту', value: 'card' }]"
+                        placeholder="Метод оплаты"
+                        class="flex-grow"
+                    />
+                    <div class="flex-grow flex flex-nowrap items-center justify-end gap-x-2 text-dark font-semibold">
+                        Сумма от:
+                        <FTextField :max-width="90" outlined placeholder="00"/>
+                        до
+                        <FTextField :max-width="90" outlined placeholder="00"/>
+                    </div>
+                </template>
+                <template #mobile>
+                    <div class="flex flex-col gap-4">
+                        <FDatePicker v-model="datePickerValue" range/>
+                        <div class="flex flex-nowrap gap-2">
+                            <FSelect placeholder="Метод оплаты" class="w-full"/>
+                            <FSelect placeholder="Валюты" class="w-full"/>
+                        </div>
+                        <FSelect placeholder="Статус"/>
+                        <div class="flex flex-nowrap gap-2">
+                            <FTextField outlined label="Сумма от" placeholder="00"/>
+                            <FTextField outlined label="Сумма до" placeholder="00"/>
+                        </div>
+                    </div>
+                </template>
+            </Filters>
         </template>
         <template #default>
             <FCard no-paddings no-shadows-mobile>
@@ -196,6 +212,7 @@ import FSelect from '../../components/kit/FSelect.vue';
 import FTimePicker from '../../components/kit/FTimePicker.vue';
 import FDatePicker from '../../components/kit/FDatePicker.vue';
 import FDivider from '../../components/kit/FDivider.vue';
+import Filters from '../../components/layout/Filters.vue';
 
 const dialogData = ref(null);
 const dialogVisible = ref(false);

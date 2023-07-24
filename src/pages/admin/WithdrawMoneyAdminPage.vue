@@ -11,7 +11,7 @@
             </div>
         </template>
         <template #body-prepend>            
-            <div v-show="isFiltersVisible" class="px-7 pb-4 flex flex-wrap gap-4 bg-white filter drop-shadow-lg">
+            <Filters v-model="isFiltersVisible">
                 <div class="border-[1px] border-primary-light w-full"/>
                 <FTextField outlined placeholder="Искать по ID, реквизитам или email" width="100%">
                     <template #prepend>
@@ -42,7 +42,7 @@
                     до
                     <FTextField :max-width="90" outlined placeholder="00"/>
                 </div>
-            </div>
+            </Filters>
         </template>
         <template #default>
             <FCard no-paddings>
@@ -184,6 +184,7 @@ import FIcon from '../../components/kit/FIcon.vue';
 import FTextArea from '../../components/kit/FTextArea.vue';
 import FDatePicker from '../../components/kit/FDatePicker.vue';
 import FSelect from '../../components/kit/FSelect.vue';
+import Filters from '../../components/layout/Filters.vue';
 
 const isFiltersVisible = ref(false);
 const datePickerValue = ref(null);

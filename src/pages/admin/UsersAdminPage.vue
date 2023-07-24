@@ -11,7 +11,7 @@
             </div>
         </template>
         <template #body-prepend>            
-            <div v-show="isFiltersVisible" class="px-7 pb-4 flex flex-wrap gap-4 bg-white filter drop-shadow-lg">
+            <Filters v-model="isFiltersVisible">
                 <div class="border-[1px] border-primary-light w-full"/>
                 <FTextField :max-width="330" outlined placeholder="Искать по ID транзакции" class="flex-grow">
                     <template #prepend>
@@ -37,7 +37,7 @@
                         class="flex-grow"
                     />                  
                 </div>
-            </div>
+            </Filters>
         </template>
         <template #default>
             <FCard no-paddings>
@@ -71,6 +71,7 @@ import FTextField from '../../components/kit/FTextField.vue';
 import FSelect from '../../components/kit/FSelect.vue';
 import FTimePicker from '../../components/kit/FTimePicker.vue';
 import FDatePicker from '../../components/kit/FDatePicker.vue';
+import Filters from '../../components/layout/Filters.vue';
 
 const datePickerValue = ref(null);
 const timePickerValue = ref(null);
