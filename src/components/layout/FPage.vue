@@ -1,6 +1,9 @@
 <template>
     <div>
-        <div class="px-7 py-4 bg-white sm:filter sm:drop-shadow">
+        <div
+            v-if="title || $slots.title || $slots['title-prepend' || $slots['title-append'] || $slots['title-footer']]"
+            class="px-7 py-4 bg-white sm:filter sm:drop-shadow"
+        >
             <div
                 v-if="title || $slots.title || $slots['title-prepend'] || $slots['title-append']"
                 class="flex flex-wrap md:flex-nowrap items-center gap-4"
