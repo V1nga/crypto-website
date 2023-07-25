@@ -7,7 +7,7 @@
         :max-width="maxWidth"
         :max-height="maxHeight"
         
-        class="filter overflow-hidden"
+        class="filter"
         :class="cardClasses"
     >
         <slot/>

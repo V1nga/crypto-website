@@ -37,19 +37,19 @@
               </slot>
             </div>
             <div
-              v-show="isMenuVisible"
-              class="f-select-menu mt-2 p-2 rounded-xl absolute filter drop-shadow-2xl bg-white w-full flex flex-col gap-y-2"
-            >
-              <div
-                v-for="(item, index) of items"
-                :key="index"
-                class="p-2 text-left font-semibold rounded-xl cursor-pointer"
-                :class="{ 'bg-primary-light text-primary': (value || (selectedItem && selectedItem[itemValue])) === item[itemValue] }"
-                @click="onClickSelect(item)"
+                v-show="isMenuVisible"
+                class="f-select-menu mt-2 p-2 rounded-xl absolute filter drop-shadow-2xl bg-white w-full flex flex-col gap-y-2"
               >
-                <slot name="item" :item="item">{{ item[itemTitle] }}</slot>
+                <div
+                  v-for="(item, index) of items"
+                  :key="index"
+                  class="p-2 text-left font-semibold rounded-xl cursor-pointer"
+                  :class="{ 'bg-primary-light text-primary': (value || (selectedItem && selectedItem[itemValue])) === item[itemValue] }"
+                  @click="onClickSelect(item)"
+                >
+                  <slot name="item" :item="item">{{ item[itemTitle] }}</slot>
+                </div>
               </div>
-            </div>
         </template>
     </FInputBase>
 </template>
@@ -63,7 +63,7 @@ import FIcon from '../../components/kit/FIcon.vue';
 const emit = defineEmits(['update:modelValue', 'change']);
 const props = defineProps({
     modelValue: {
-        type: String
+        type: [String, Number]
     },
     label: {
       type: String

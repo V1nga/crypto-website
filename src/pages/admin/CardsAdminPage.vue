@@ -52,7 +52,7 @@
                     </div>
                 </div>
                 <FCard v-if="selectedCard" no-paddings class="relative w-full">
-                    <div class="p-6 pb-24 bg-active font-bold grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 3xl:grid-cols-5 gap-4">
+                    <div class="p-6 pb-24 rounded-t-xl bg-active font-bold grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 3xl:grid-cols-5 gap-4">
                         <div class="3xl:col-span-2">
                             <p class="text-sm whitespace-nowrap">Номер карты</p>
                             <p>{{ selectedCard }}</p>

@@ -70,6 +70,7 @@
                         </div>
                     </template>
                 </FTable>
+                <FPagination :items-per-page="20" :length="780"/>
             </FCard>
             <TransactionDialog
                 v-if="transactionDialogData"
@@ -185,6 +186,7 @@ import FTextArea from '../../components/kit/FTextArea.vue';
 import FDatePicker from '../../components/kit/FDatePicker.vue';
 import FSelect from '../../components/kit/FSelect.vue';
 import Filters from '../../components/layout/Filters.vue';
+import FPagination from '../../components/kit/FPagination.vue';
 
 const isFiltersVisible = ref(false);
 const datePickerValue = ref(null);
