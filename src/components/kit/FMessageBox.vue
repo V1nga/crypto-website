@@ -1,11 +1,10 @@
 <template>
     <div
         v-show="visible"
-        v-click-out-side="onClickCancel"
         :class="absolute ? 'absolute' : 'fixed'"
         class="f-messagebox-overlay flex justify-center items-center"
     >
-        <FCard :width="width" no-paddings class="filter drop-shadow-5xl">
+        <FCard v-click-out-side="onClickCancel" :width="width" no-paddings class="filter drop-shadow-5xl">
             <slot name="body">
                 <FCardTitle v-if="title" class="m-5">{{ title }}</FCardTitle>
                 <div class="mx-5">

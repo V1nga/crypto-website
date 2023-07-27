@@ -5,7 +5,7 @@
         @mouseover="onMouseOver"
         @mouseleave="onMouseLeave"
     >
-        <div class="flex flex-nowrap whitespace-nowrap" :class="buttonContentClasses">
+        <div class="whitespace-nowrap text-sm flex flex-nowrap" :class="buttonContentClasses">
             <slot name="prepend" :is-mouse-over="isMouseOver" :is-active="active"/>
             <slot :is-mouse-over="isMouseOver" :is-active="active">{{ text }}</slot>
             <slot name="append" :is-mouse-over="isMouseOver"/>

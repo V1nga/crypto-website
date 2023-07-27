@@ -4,7 +4,7 @@
             <div class="px-8 py-4 bg-white flex flex-col gap-4">
                 <div class="flex flex-nowrap items-center">
                     <FArrowButton reverse active class="my-1 mr-5" @click="$router.push('/admin/cards')"/>
-                    <div class="text-lg font-bold">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+                    <div class="font-bold">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
                 </div>
                 <div class="flex flex-wrap gap-4">
                     <div class="flex-grow">
@@ -31,13 +31,13 @@
                 <FCard
                     v-for="(item, index) of items"
                     :key="index"
-                    class="font-semibold"
+                    class="text-sm font-semibold"
                 >
                     <div class="flex flex-nowrap gap-4">
                         <div class="font-bold">{{ item.id }}</div>
                         <div class="flex-grow flex justify-end">{{ item.date }}</div>
                     </div>
-                    <div class="text-secondary mt-2">{{ item.text }}</div>
+                    <div class="mt-2 text-secondary">{{ item.text }}</div>
                 </FCard>
             </div>
         </template>

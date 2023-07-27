@@ -1,5 +1,5 @@
 <template>
-    <div class="flex font-semibold text-lg">
+    <div class="text-xs font-semibold flex">
         <FIcon :icon="number > 0 ? 'stonks' : 'not-stonks'"/>
 
         <div :class="number > 0 ? 'text-success' : 'text-danger'" class="ml-2">

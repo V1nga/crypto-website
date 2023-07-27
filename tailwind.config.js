@@ -33,7 +33,7 @@ export default {
       },
       secondary: {
         light: '#D8D8D8',
-        default: '#6A6E85'
+        DEFAULT: '#6A6E85'
       },
       warning: {
         light: '#FDECD1',

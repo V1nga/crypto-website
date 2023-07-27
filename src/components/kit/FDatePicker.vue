@@ -14,7 +14,7 @@
         <template #default>
             <VueDatePicker v-model="value" :range="range" :partial-range="false">
                 <template #trigger>
-                    <div class="cursor-pointer border-[1px] border-secondary-light rounded-xl px-3 py-2 flex flex-nowrap gap-x-3 bg-white">
+                    <div class="cursor-pointer border-[1px] border-secondary-light rounded-xl px-3 py-2 text-sm flex flex-nowrap gap-x-3 bg-white">
                         <FIcon icon="calendar"/>
                         <div class="font-semibold">
                           <template v-if="range">

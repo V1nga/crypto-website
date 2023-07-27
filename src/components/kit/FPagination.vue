@@ -1,6 +1,6 @@
 <template>
     <div class="px-12 py-4 flex flex-nowrap items-center gap-3">
-        <span class="font-semibold">Показано</span>
+        <span class="text-sm font-semibold">Показано</span>
         <FSelect
             v-model="_itemsPerPage"
             :width="90"
@@ -11,36 +11,34 @@
             ]"
             mandatory
         />
-        <span class="font-semibold">из {{ length }}</span>
+        <span class="text-sm font-semibold">из {{ length }}</span>
         <div class="flex-grow flex flex-nowrap justify-end items-center gap-2">
             <FArrowButton
                 :disabled="value === 1"
                 secondary
                 reverse
-                class="mr-5"
                 @click="value > 1 ? value -= 1 : null"
             />
             <template v-if="(pageButtonsCount - 1) < currentPage">
-                <button class="w-[38px] h-[38px] rounded-full" @click="value = 1">1</button>
+                <button class="w-[30px] h-[30px] rounded-full text-sm" @click="value = 1">1</button>
                 <FIcon icon="dots"/>
             </template>
             <button
                 v-for="(button, index) of pageButtons"
                 :key="index"
                 :class="{ 'bg-primary text-white': currentPage === button }"
-                class="w-[38px] h-[38px] rounded-full"
+                class="w-[30px] h-[30px] rounded-full text-sm"
                 @click="value = button"
             >
                 {{ button }}
             </button>
             <template v-if="currentPage + (Math.floor(pageButtonsCount / 2) + 1) < pageCount">
                 <FIcon icon="dots"/>
-                <button class="w-[38px] h-[38px] rounded-full" @click="value = pageCount">{{ pageCount }}</button>
+                <button class="w-[30px] h-[30px] rounded-full text-sm" @click="value = pageCount">{{ pageCount }}</button>
             </template>
             <FArrowButton
                 :disabled="value === pageCount"
                 secondary 
-                class="ml-5"
                 @click="value < pageCount ? value += 1 : null"
             />
         </div>

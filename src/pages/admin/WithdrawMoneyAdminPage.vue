@@ -36,7 +36,7 @@
                     placeholder="Валюта"
                     class="flex-grow"
                 />
-                <div class="flex-grow flex flex-nowrap items-center justify-end gap-x-2 text-dark font-semibold">
+                <div class="text-sm text-dark font-semibold flex-grow flex flex-nowrap items-center justify-end gap-x-2">
                     Сумма от:
                     <FTextField :max-width="90" outlined placeholder="00"/>
                     до
@@ -56,7 +56,7 @@
                     <template #item-status="{ item }">
                         <div>
                             <FChip v-bind:[item.statusColor]=true>{{ item.status }}</FChip>
-                            <div class="flex flex-nowrap text-secondary font-bold text-sm mt-1">
+                            <div class="mt-1 text-xs font-bold flex flex-nowrap text-secondary">
                                 {{ item.statusDate }}
                                 <button v-if="item.statusChanger">
                                     <FIcon icon="person" class="ml-2"/>
@@ -65,7 +65,7 @@
                         </div>
                     </template>
                     <template #item-edit="{ item }">
-                        <div class="text-right pr-8">
+                        <div class="pr-8 text-right">
                             <FArrowButton secondary @click="openTransactionDialog(item)"/>
                         </div>
                     </template>
@@ -119,8 +119,8 @@
                 </template>
                 <template #header-append>
                     <div class="whitespace-nowrap">
-                        <span class="font-bold text-dark mr-1">Кем изменен статус:</span>
-                        <span class="font-semibold text-primary">{{ transactionDialogData.closer }}</span>
+                        <span class="mr-1 text-dark font-bold">Кем изменен статус:</span>
+                        <span class="text-primary font-semibold">{{ transactionDialogData.closer }}</span>
                     </div>
                 </template>
                 <template #transaction-closer="{ transaction }">
@@ -140,7 +140,7 @@
                     </div>
                 </template>
                 <template #comment-login="{ comment }">
-                    <div class="flex flex-nowrap whitespace-nowrap items-center gap-x-1">
+                    <div class="whitespace-nowrap flex flex-nowrap items-center gap-x-1">
                         {{ comment.login }}
                         <span class="text-dark">изменил статус с</span>
                         <FChip v-bind:[comment.previousStatusColor]=true>{{ comment.previousStatus }}</FChip>
@@ -156,10 +156,10 @@
                         class="mt-2 px-4 py-2 flex flex-nowrap items-center"
                     >
                         <div class="whitespace-nowrap">
-                            <p class="font-bold">{{ attachment.fileName }}</p>
-                            <p class="font-semibold text-secondary">{{ attachment.fileSize }}</p>
+                            <p class="text-sm font-bold">{{ attachment.fileName }}</p>
+                            <p class="text-xs text-secondary font-semibold">{{ attachment.fileSize }}</p>
                         </div>
-                        <div class="flex justify-end w-full">
+                        <div class="flex-grow flex justify-end">
                             <button>
                                 <FIcon icon="rubbish"/>
                             </button>

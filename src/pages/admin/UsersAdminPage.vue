@@ -54,6 +54,7 @@
                         </div>
                     </template>
                 </FTable>
+                <FPagination :items-per-page="20" :length="780"/>
             </FCard>
         </template>
     </FPage>
@@ -72,6 +73,7 @@ import FSelect from '../../components/kit/FSelect.vue';
 import FTimePicker from '../../components/kit/FTimePicker.vue';
 import FDatePicker from '../../components/kit/FDatePicker.vue';
 import Filters from '../../components/layout/Filters.vue';
+import FPagination from '../../components/kit/FPagination.vue';
 
 const datePickerValue = ref(null);
 const timePickerValue = ref(null);

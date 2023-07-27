@@ -51,22 +51,23 @@
                     <template #item-status="{ item }">
                         <div>
                             <FChip v-bind:[item.statusColor]=true>{{ item.status }}</FChip>
-                            <div class="flex flex-nowrap text-secondary font-bold text-sm mt-1">{{ item.statusDate }}</div>
+                            <div class="mt-1 text-xs text-secondary font-bold flex flex-nowrap">{{ item.statusDate }}</div>
                         </div>
                     </template>
                     <template #item-edit="{ item }">
-                        <div class="text-right pr-8">
+                        <div class="text-right">
                             <FArrowButton secondary @click="openDialog(item)"/>
                         </div>
                     </template>
                 </FTable>
+                <FPagination :items-per-page="20" :length="780"/>
             </FCard>
             <FMessageBox 
                 v-model="createDisputMessageboxVisible"
                 :width="470"
                 title="Создать диспут"
             >
-                <div class="flex flex-col gap-y-4 mb-8">
+                <div class="mb-8 flex flex-col gap-y-4">
                     <FTextField
                         outlined
                         label="ID диспута"
@@ -101,25 +102,25 @@
                 :comments="comments"
             >
                 <template #header-status="{ statusColor, statusText }">
-                    <div class="flex gap-x-2 text-dark font-semibold">
+                    <div class="text-dark text-sm font-semibold flex gap-x-2">
                         <span>Статус транзакции</span>
                         <FChip v-bind:[statusColor]=true>{{ statusText }}</FChip>
                     </div>
                 </template>
                 <template #header-append>
-                    <div class="whitespace-nowrap mt-1">
-                        <span class="font-bold text-dark mr-1">Кем изменен статус:</span>
-                        <span class="font-semibold text-primary">{{ dialogData.closer }}</span>
+                    <div class="mt-1 whitespace-nowrap text-sm">
+                        <span class="mr-1 text-dark font-bold">Кем изменен статус:</span>
+                        <span class="text-primary font-semibold">{{ dialogData.closer }}</span>
                     </div>
                 </template>
                 <template #transaction-id="{ transaction }">
                     <div class="grid grid-cols-2">
                         <div>
-                            <p class="text-secondary font-semibold">ID транзакции</p>
+                            <p class="text-sm text-secondary font-semibold">ID транзакции</p>
                             <p class="text-2xl font-bold">{{ transaction.transactionId }}</p>
                         </div>
                         <div>
-                            <p class="text-secondary font-semibold">ID диспута</p>
+                            <p class="text-sm text-secondary font-semibold">ID диспута</p>
                             <p class="text-2xl font-bold">{{ transaction.id }}</p>
                         </div>
                     </div>
@@ -144,7 +145,7 @@
                     </div>
                 </template>
                 <template #comment-login="{ comment }">
-                    <div class="flex flex-nowrap whitespace-nowrap items-center gap-x-1">
+                    <div class="text-sm flex flex-nowrap whitespace-nowrap items-center gap-x-1">
                         {{ comment.login }}
                         <span class="text-dark">изменил статус с</span>
                         <FChip v-bind:[comment.previousStatusColor]=true>{{ comment.previousStatus }}</FChip>
@@ -160,8 +161,8 @@
                         class="mt-2 px-4 py-2 flex flex-nowrap items-center"
                     >
                         <div class="whitespace-nowrap">
-                            <p class="font-bold">{{ attachment.fileName }}</p>
-                            <p class="font-semibold text-secondary">{{ attachment.fileSize }}</p>
+                            <p class="text-sm font-bold">{{ attachment.fileName }}</p>
+                            <p class="text-xs text-secondary font-semibold">{{ attachment.fileSize }}</p>
                         </div>
                         <div class="flex justify-end w-full">
                             <button>
@@ -191,6 +192,7 @@ import FSelect from '../../components/kit/FSelect.vue';
 import FTimePicker from '../../components/kit/FTimePicker.vue';
 import FDatePicker from '../../components/kit/FDatePicker.vue';
 import Filters from '../../components/layout/Filters.vue';
+import FPagination from '../../components/kit/FPagination.vue';
 
 const dialogData = ref(null);
 const dialogVisible = ref(false);

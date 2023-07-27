@@ -1,5 +1,5 @@
 <template>
-    <img :src="`/icons/${ icon }.svg`" :width="width" :height="height"/>
+    <img :src="`/icons/${ icon }.svg`" :width="width" :height="height" style="min-width: min-content; min-height: min-content;"/>
 </template>
 <script setup>
 defineProps({

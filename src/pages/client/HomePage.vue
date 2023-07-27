@@ -2,10 +2,10 @@
   <FPage>
     <div class="grid xl:grid-cols-4 xl:gap-4 2xl:gap-8 grid-cols-1">
       <FCard class="p-8 mb-6 xl:mb-0">
-        <div class="font-semibold text-dark mb-3">Общий баланс</div>
+        <div class="mb-3 text-sm text-dark font-semibold">Общий баланс</div>
         <FMoney :money="12987.89" currency="USDT" class="mb-3"/>
-        <div class="text-sm font-semibold text-secondary mb-9">$345,678.00</div>
-        <div class="absolute inset-x-0 bottom-0 p-6">
+        <div class="mb-9 text-xs text-secondary font-semibold">$345,678.00</div>
+        <div class="p-6 inset-x-0 bottom-0 absolute">
           <FButton light fill>Вывод средств</FButton>
         </div>
       </FCard>
@@ -13,41 +13,41 @@
       <FCard class="p-8 mb-6 xl:mb-0 xl:col-span-3">
         <div class="grid lg:grid-cols-3 md:grid-cols-2 gap-x-12 gap-y-6">
           <div>
-            <div class="font-semibold text-dark mb-2">Конверсия</div>
-            <div class="text-primary text-4xl font-semibold">3.56%</div>
+            <div class="mb-2 text-sm text-dark font-semibold">Конверсия</div>
+            <div class="text-4xl text-primary font-semibold">3.56%</div>
           </div>
 
           <div>
-            <div class="font-semibold text-dark mb-2">Успешных платежей</div>
-            <FNumber :number="1234" class="text-success text-4xl font-semibold"/>
+            <div class="mb-2 text-sm text-dark font-semibold">Успешных платежей</div>
+            <FNumber :number="1234" class="text-4xl text-success font-semibold"/>
           </div>
 
           <div>
-            <div class="font-semibold text-dark mb-2">Не успешных платежей</div>
-            <FNumber :number="1234" class="text-danger text-4xl font-semibold"/>
+            <div class="mb-2 text-sm text-dark font-semibold">Не успешных платежей</div>
+            <FNumber :number="1234" class="text-4xl text-danger font-semibold"/>
           </div>
 
           <div>
-            <div class="font-semibold text-dark mb-2">Транзакции за сегодня</div>
-            <div class="text-primary text-3xl font-semibold mb-2">129</div>
+            <div class="mb-2 text-sm text-dark font-semibold">Транзакции за сегодня</div>
+            <div class="mb-2 text-3xl text-primary font-semibold">129</div>
             <FStonks :number="3"/>
           </div>
 
           <div>
-            <div class="font-semibold text-dark mb-2">Мин. сумма за сегодня</div>
+            <div class="mb-2 text-sm text-dark font-semibold">Мин. сумма за сегодня</div>
             <FMoney :money="1112987.34" currency="USDT" text-size="3xl" slug-text-siz="normal" class="mb-2"/>
             <FStonks :number="3.67" append="%"/>
           </div>
 
           <div>
-            <div class="font-semibold text-dark mb-2">Макс. сумма за сегодня</div>
+            <div class="mb-2 text-sm text-dark font-semibold">Макс. сумма за сегодня</div>
             <FMoney :money="12987.34" currency="USDT" text-size="3xl" slug-text-size="normal" class="mb-2"/>
             <FStonks :number="-4.56" append="%"/>
           </div>
         </div>
       </FCard>
 
-      <FCard no-paddings class="py-6 xl:col-span-4">
+      <FCard no-paddings class="pt-6 pb-2 xl:col-span-4">
         <FCardTitle class="ml-8">Текущие выводы</FCardTitle>
         <div>
           <FTable :headers="transactionsHeaders" :items="transactionsItems">
@@ -60,7 +60,7 @@
             <template #item-status="{ item }">
               <div>
                 <FChip v-bind:[item.statusColor]=true>{{ item.status }}</FChip>
-                <div class="flex flex-nowrap text-secondary font-bold text-sm mt-1">
+                <div class="mt-1 text-xs text-secondary font-bold flex flex-nowrap">
                   {{ item.statusDate }}
                   <button v-if="item.statusChanger">
                       <FIcon icon="person" class="ml-2"/>
@@ -69,11 +69,12 @@
               </div>
             </template>
             <template #item-edit>
-              <div class="text-right pr-8">
+              <div class="text-right">
                 <FArrowButton secondary/>
               </div>
             </template>
           </FTable>     
+          <FPagination :items-per-page="20" :length="780"/>
         </div>
       </FCard>
     </div>
@@ -91,6 +92,7 @@ import FTable from '../../components/kit/FTable.vue';
 import FChip from '../../components/kit/FChip.vue';
 import FArrowButton from '../../components/kit/FArrowButton.vue';
 import FIcon from '../../components/kit/FIcon.vue';
+import FPagination from '../../components/kit/FPagination.vue';
 
 const transactionsHeaders = [
   { text: 'Клиент', field: 'client' },

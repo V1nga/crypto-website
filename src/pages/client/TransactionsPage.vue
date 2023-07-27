@@ -21,16 +21,16 @@
                     <template #item-status="{ item }">
                         <div>
                             <FChip v-bind:[item.statusColor]=true>{{ item.status }}</FChip>
-                            <div class="flex flex-nowrap text-secondary font-bold text-sm mt-1">{{ item.statusDate }}</div>
+                            <div class="mt-1 text-xs text-secondary font-bold flex flex-nowrap">{{ item.statusDate }}</div>
                         </div>
                     </template>
                     <template #item-edit="{ item }">
-                        <div class="text-right pr-8">
+                        <div class="text-right">
                             <FArrowButton secondary @click="openDialog(item)"/>
                         </div>
                     </template>
                     <template #mobile-item="{ item }">
-                        <div class="flex flex-nowrap p-4">
+                        <div class="p-4 flex flex-nowrap">
                             <div>
                                 <p class="mb-2 font-semibold">{{ item.id  }}</p>
                                 <FChip v-bind:[item.statusColor]=true>{{ item.status }}</FChip>
@@ -49,6 +49,7 @@
                         <FDivider/>
                     </template>
                 </FTable>
+                <FPagination :items-per-page="20" :length="780"/>
             </FCard>
             <TransactionDialog
                 v-if="dialogData"
@@ -89,6 +90,7 @@ import FArrowButton from '../../components/kit/FArrowButton.vue';
 import TransactionDialog from '../../components/layout/TransactionDialog.vue';
 import FIcon from '../../components/kit/FIcon.vue';
 import FDivider from '../../components/kit/FDivider.vue';
+import FPagination from '../../components/kit/FPagination.vue';
 
 const searchText = ref(null);
 

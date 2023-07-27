@@ -11,7 +11,7 @@
         </div>
         <div class="cursor-pointer" @click="model = value">
             <slot>
-                <div class="font-bold ml-4">{{ text }}</div>
+                <div class="text-sm font-bold ml-4">{{ text }}</div>
             </slot>
         </div>
         <Transition>

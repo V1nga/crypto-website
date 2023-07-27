@@ -6,8 +6,8 @@
                     <div class="flex flex-wrap md:flex-nowrap justify-center gap-6">
                         <FIcon icon="lock-1"/>
                         <div>
-                            <div class="font-bold text-lg">2FA token</div>
-                            <div class="text-dark font-semibold">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco Lorem ipsum dolor sit amet</div>
+                            <div class="font-bold">2FA token</div>
+                            <div class="text-sm text-dark font-semibold">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco Lorem ipsum dolor sit amet</div>
                         </div>    
                     </div>              
                     <div class="flex-grow flex justify-end">

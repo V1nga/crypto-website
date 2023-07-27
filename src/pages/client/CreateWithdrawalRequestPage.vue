@@ -22,7 +22,7 @@
                                 </div>
                             </template>
                             <template #append>
-                                <div class="mr-2 text-dark font-semibold">USDT</div>
+                                <div class="mr-2 text-sm text-dark font-semibold">USDT</div>
                             </template>
                         </FTextField>
                         <FDivider class="my-8"/>
@@ -35,8 +35,7 @@
                                             mandatory
                                             label="Выберите способ вывода"
                                             :items="[{ text: 'На карту VISA / Mastercard', value: 'visa/mastercard' }]"
-                                        >
-                                        </FSelect>
+                                        />
                                     </div>
                                     <div class="flex flex-wrap gap-4">
                                         <div class="flex-grow">
@@ -50,25 +49,19 @@
                                             <FTextField
                                                 :width="160"
                                                 outlined
+                                                label="Действительно до"
                                                 placeholder="00 / 00"
                                                 text-align="center"
-                                            >
-                                                <template #label>
-                                                    <div class="font-bold">Действительно до</div>
-                                                </template>
-                                            </FTextField>
+                                            />
                                         </div>
                                         <div class="flex-none">
                                             <FTextField
                                                 :width="100"
                                                 outlined
+                                                label="CVV код"
                                                 placeholder="000"
                                                 text-align="center"
-                                            >
-                                                <template #label>
-                                                    <div class="font-bold">CVV код</div>
-                                                </template>
-                                            </FTextField>
+                                            />
                                         </div>
                                     </div>
                                 </div>
@@ -105,7 +98,7 @@
                                                 </template>
                                             </FTextField>
 
-                                            <div class="mt-4 font-semibold">
+                                            <div class="mt-4 text-xs font-semibold">
                                                 <p class="text-secondary">Expected arrival: <span class="text-dark">15 network confirmation</span></p>
                                                 <p class="text-secondary">Expected unlock: <span class="text-dark">15 network confirmation</span></p>
                                                 <p>Отправляйте только Bitcoin на этот адрес</p>
@@ -119,22 +112,22 @@
                                 </div>
                             </template>
                         </FRadio>
-                        <FButton fill class="mt-8" @click="onClickSubmit">Подать заявку на вывод средств</FButton>
+                        <FButton fill class="mt-8 py-3" @click="onClickSubmit">Подать заявку на вывод средств</FButton>
                     </div>
                     <div class="order-first lg:order-last font-semibold">
-                        <p class="font-bold text-lg">Tips</p>
-                        <p class="my-4 text-dark">Lorem ipsum dolor sit amet consectetur. Tellus condimentum quam enim curabitur aenean.</p>
-                        <li class="text-dark mb-4">Lorem ipsum dolor sit amet consectetur. Sit sed cursus amet at ultricies eget ac eleifend euismod.</li>
-                        <li class="text-dark">3Lorem ipsum dolor sit amet consectetur. </li>
+                        <p class="font-bold">Tips</p>
+                        <p class="my-4 text-sm text-dark">Lorem ipsum dolor sit amet consectetur. Tellus condimentum quam enim curabitur aenean.</p>
+                        <li class="mb-4 text-sm text-dark">Lorem ipsum dolor sit amet consectetur. Sit sed cursus amet at ultricies eget ac eleifend euismod.</li>
+                        <li class="text-sm text-dark">3Lorem ipsum dolor sit amet consectetur. </li>
                     </div>
                 </div>
             </FCard>
             <FMessageBox v-model="submitMessageBoxVisible" :width="600">
                 <template #body>
-                    <div class="text-center grid justify-items-center p-8 gap-4">
+                    <div class="p-8 text-center grid justify-items-center gap-4">
                         <img src="/hourglass.svg"/>
-                        <p class="text-xl text-dark font-bold">Ваша заявка отправлена в обработку</p>
-                        <p>Lorem ipsum dolor sit amet consectetur. Tellus condimentum quam enim curabitur aenean. Lorem ipsum dolor sit amet consectetur. Tellus condimentum quam enim curabitur aenean.</p>
+                        <p class="text-2xl text-dark font-bold">Ваша заявка отправлена в обработку</p>
+                        <p class="text-sm">Lorem ipsum dolor sit amet consectetur. Tellus condimentum quam enim curabitur aenean. Lorem ipsum dolor sit amet consectetur. Tellus condimentum quam enim curabitur aenean.</p>
                         <FButton class="mt-6" @click="$router.push('/')">Вернуться на главную</FButton>
                     </div>
                 </template>

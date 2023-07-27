@@ -4,14 +4,14 @@
             <table class="text-left whitespace-nowrap">
                 <thead>
                     <tr>
-                        <th v-for="(header, index) of headers" :key="index" scope="col" class="px-6 py-4 font-bold text-sm">
+                        <th v-for="(header, index) of headers" :key="index" scope="col" class="px-6 py-4 font-bold text-xs">
                             {{ header.text }}
                         </th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr v-for="(item, index) of items" :key="index" class="border-b border-primary-light">
-                        <td v-for="(header, index) of headers" :key="index" class="whitespace-nowrap px-6 py-4 font-semibold">
+                        <td v-for="(header, index) of headers" :key="index" class="whitespace-nowrap px-6 py-2 text-sm font-semibold">
                             <slot :name="`item-${ header.field }`" :item="item">
                                 {{ item[header.field] }}
                             </slot>

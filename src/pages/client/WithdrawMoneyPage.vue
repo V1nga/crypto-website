@@ -3,8 +3,8 @@
         <template #title-append>
             <div class="flex-grow flex justify-end gap-2 xl:gap-6">
                 <div class="hidden lg:flex flex-nowrap items-center">
-                    <div class="whitespace-nowrap text-dark font-semibold mr-2">Доступно для вывода:</div>
-                    <FMoney :money="12987.89" currency="USDT" text-size="2xl" slug-text-size="sm" font-weight="bold"/>
+                    <div class="mr-2 whitespace-nowrap text-sm text-dark font-semibold">Доступно для вывода:</div>
+                    <FMoney :money="12987.89" currency="USDT" text-size="xl" slug-text-size="sm" font-weight="bold"/>
                 </div>
                 <FButton
                     class="w-full md:w-min"
@@ -17,7 +17,7 @@
         <template #title-footer>
             <div class="mt-4 lg:hidden flex flex-nowrap items-center">
                 <div class="whitespace-nowrap text-dark font-semibold mr-2">Доступно для вывода:</div>
-                <FMoney :money="12987.89" currency="USDT" text-size="2xl" slug-text-size="sm" font-weight="bold"/>
+                <FMoney :money="12987.89" currency="USDT" text-size="2xl" slug-text-size="xs" font-weight="bold"/>
             </div>
         </template>
         <template #default>
@@ -32,7 +32,7 @@
                     <template #item-status="{ item }">
                         <div>
                             <FChip v-bind:[item.statusColor]=true>{{ item.status }}</FChip>
-                            <div class="flex flex-nowrap text-secondary font-bold text-sm mt-1">
+                            <div class="mt-1 text-xs text-secondary font-bold flex flex-nowrap">
                                 {{ item.statusDate }}
                                 <button v-if="item.statusChanger">
                                     <FIcon icon="person" class="ml-2"/>
@@ -41,11 +41,12 @@
                         </div>
                     </template>
                     <template #item-edit="{ item }">
-                        <div class="text-right pr-8">
+                        <div class="text-right">
                             <FArrowButton secondary @click="openTransactionDialog(item)"/>
                         </div>
                     </template>
                 </FTable>
+                <FPagination :items-per-page="20" :length="780"/>
             </FCard>
             <TransactionDialog
                 v-if="transactionDialogData"
@@ -76,16 +77,16 @@
                     </div>
                 </template>
                 <template #header-append>
-                    <div class="whitespace-nowrap">
-                        <span class="font-bold text-dark mr-1">Кем изменен статус:</span>
-                        <span class="font-semibold text-primary">{{ transactionDialogData.closer }}</span>
+                    <div class="whitespace-nowrap text-sm">
+                        <span class="mr-1 text-dark font-bold">Кем изменен статус:</span>
+                        <span class="text-primary font-semibold">{{ transactionDialogData.closer }}</span>
                     </div>
                 </template>
                 <template #transaction-id="{ transaction }">
                     <div class="flex flex-nowrap items-center">
                         <div>
                             <p class="text-secondary">ID транзакции</p>
-                            <p class="text-xl font-bold">{{ transaction.id }}</p>
+                            <p class="text-2xl font-bold">{{ transaction.id }}</p>
                         </div>
                         <div class="w-full flex justify-end">
                             <FButton color="danger" hover-color="danger-dark" @click="openDisputMessageBox">Создать диспут</FButton>
@@ -114,9 +115,9 @@
                 <template #comment-login="{ comment }">
                     <div class="flex flex-nowrap whitespace-nowrap items-center gap-x-1">
                         {{ comment.login }}
-                        <span class="text-dark">изменил статус с</span>
+                        <span class="text-xs text-dark">изменил статус с</span>
                         <FChip v-bind:[comment.previousStatusColor]=true>{{ comment.previousStatus }}</FChip>
-                        <span class="text-dark">на</span>
+                        <span class="text-xs text-dark">на</span>
                         <FChip v-bind:[comment.statusColor]=true>{{ comment.status }}</FChip>
                     </div>
                 </template>
@@ -128,8 +129,8 @@
                         class="mt-2 px-4 py-2 flex flex-nowrap items-center"
                     >
                         <div class="whitespace-nowrap">
-                            <p class="font-bold">{{ attachment.fileName }}</p>
-                            <p class="font-semibold text-secondary">{{ attachment.fileSize }}</p>
+                            <p class="text-sm font-bold">{{ attachment.fileName }}</p>
+                            <p class="text-xs font-semibold text-secondary">{{ attachment.fileSize }}</p>
                         </div>
                         <div class="flex justify-end w-full">
                             <button>
@@ -156,6 +157,7 @@ import FMessageBox from '../../components/kit/FMessageBox.vue';
 import FTextField from '../../components/kit/FTextField.vue';
 import FIcon from '../../components/kit/FIcon.vue';
 import FTextArea from '../../components/kit/FTextArea.vue';
+import FPagination from '../../components/kit/FPagination.vue';
 
 const transactionDialogData = ref(null);
 const transactionDialogVisible = ref(false);

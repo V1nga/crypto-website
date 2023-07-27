@@ -1,28 +1,28 @@
 <template>
     <FDialog v-model="visible" class="text-dark">
-        <div class="text-center py-12">
+        <div class="py-12 text-center">
             <slot name="header-prepend" :transaction="transaction"/>
             <slot name="header" :transaction="transaction">
                 <FMoney :money="money" :currency="currency" :color="moneyColor" textSize="5xl" slug-text-size="2xl"/>
-                <div class="flex flex-nowrap justify-center mt-4">
+                <div class="mt-4 flex flex-nowrap justify-center">
                     <slot name="header-status" :status-color="statusColor" :status-text="statusText">
                         <FChip v-bind:[statusColor]=true>{{ statusText }}</FChip>
                     </slot>
-                    <div class="text-dark font-semibold ml-2">
+                    <div class="ml-2 text-sm text-dark font-semibold">
                         <slot name="header-date" :date="statusDate">{{ statusDate }}</slot>
                     </div>
                 </div>
             </slot>
             <slot name="header-append"/>
         </div>
-        <div class="bg-white p-4">
+        <div class="p-6 bg-white">
             <slot>
                 <slot name="transaction-id" :transaction="transaction">
-                    <p class="text-secondary">ID транзакции</p>
+                    <p class="text-sm text-secondary">ID транзакции</p>
                     <p class="text-2xl font-bold">{{ transactionId }}</p>
                 </slot>
 
-                <div class="mt-4 grid grid-cols-2 gap-y-2 text-md text-dark">
+                <div class="mt-4 text-sm text-dark grid grid-cols-2 gap-y-2">
                     <template
                         v-for="(header, index) of headers"
                         :key="index"
@@ -37,20 +37,20 @@
                 </div>
             </slot>
         </div>
-        <div class="px-4 py-6">
-            <p class="font-bold text-xl mb-5">Комментарии</p>
+        <div class="p-6">
+            <p class="mb-4 font-bold">Комментарии</p>
             <div v-for="(comment, index) of comments" :key="index" class="mb-10">
                 <slot name="comment-prepend" :comment="comment"/>
                 <slot name="comment" :comment="comment">
-                    <p class="text-primary font-bold">
+                    <p class="text-sm text-primary font-bold">
                         <slot name="comment-login" :comment="comment">
                             {{ comment.login }} <span class="text-dark">оставил комментарий</span>
                         </slot>
                     </p>
-                    <p class="text-secondary font-semibold">
+                    <p class="text-sm text-secondary font-semibold">
                         <slot name="comment-date" :comment=comment>{{ comment.date }}</slot>
                     </p>
-                    <FCard class="mt-2 font-semibold">
+                    <FCard class="mt-2 text-sm font-semibold">
                         <slot name="comment-text" :comment="comment">{{ comment.text }}</slot>                       
                     </FCard>
                 </slot>

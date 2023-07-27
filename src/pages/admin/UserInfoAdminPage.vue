@@ -7,7 +7,7 @@
                     <div class="flex-grow flex flex-nowrap gap-4 justify-end">
                         <div
                             v-if="user.blocked"
-                            class="p-2 whitespace-nowrap font-semibold text-danger bg-danger-light rounded-xl hidden lg:flex flex-nowrap gap-x-2 items-center"              
+                            class="p-2 whitespace-nowrap font-semibold text-sm text-danger bg-danger-light rounded-xl hidden lg:flex flex-nowrap gap-x-2 items-center"              
                         >
                             <FIcon icon="danger"/>
                             Пользователь заблокирован
@@ -25,22 +25,22 @@
                 </div>
                 <div
                     v-if="user.blocked"
-                    class="mx-5 p-2 whitespace-nowrap font-semibold text-danger bg-danger-light rounded-xl lg:hidden flex flex-nowrap gap-x-2 items-center"              
+                    class="mx-5 p-2 whitespace-nowrap font-semibold text-sm text-danger bg-danger-light rounded-xl lg:hidden flex flex-nowrap gap-x-2 items-center"              
                 >
                     <FIcon icon="danger"/>
                     Пользователь заблокирован
                 </div>
                 <div class="px-5 md:px-10 font-bold grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
                     <div>
-                        <p class="text-sm">Пользователь</p>
-                        <p>{{ user.email  }}</p>
+                        <p class="text-xs">Пользователь</p>
+                        <p class="text-sm">{{ user.email  }}</p>
                     </div>
                     <div>
-                        <p class="text-sm">ID пользователя</p>
-                        <p>{{ user.id  }}</p>
+                        <p class="text-xs">ID пользователя</p>
+                        <p class="text-sm">{{ user.id  }}</p>
                     </div>
                     <div>
-                        <p class="text-sm">Баланс, USD</p>
+                        <p class="text-xs">Баланс, USD</p>
                         <FButton base @click="showBalanceCorrectMessageBox('usd')">
                             <template #default="{ isMouseOver }">
                                 <div class="text-primary flex flex-nowrap gap-x-2">
@@ -53,7 +53,7 @@
                         </FButton>
                     </div>
                     <div>
-                        <p class="text-sm">Баланс, EUR</p>
+                        <p class="text-xs">Баланс, EUR</p>
                         <FButton base @click="showBalanceCorrectMessageBox('eur')">
                             <template #default="{ isMouseOver }">
                                 <div class="w-full text-primary flex flex-nowrap gap-x-2">
@@ -66,7 +66,7 @@
                         </FButton>
                     </div>
                     <div>
-                        <p class="text-sm">Баланс, RUB</p>
+                        <p class="text-xs">Баланс, RUB</p>
                         <FButton base @click="showBalanceCorrectMessageBox('rub')">
                             <template #default="{ isMouseOver }">
                                 <div class="text-primary flex flex-nowrap gap-x-2">
@@ -79,7 +79,7 @@
                         </FButton>
                     </div>
                     <div>
-                        <p class="text-sm">Баланс, UAH</p>
+                        <p class="text-xs">Баланс, UAH</p>
                         <FButton base @click="showBalanceCorrectMessageBox('uah')">
                             <template #default="{ isMouseOver }">
                                 <div class="text-primary flex flex-nowrap gap-x-2">
@@ -111,37 +111,42 @@
         </template>
         <template #default>
             <FCard no-paddings>
-                <FTable v-if="tab === 0" :headers="transactionsHeaders" :items="transactionsItems">
-                    <template #item-status="{ item }">
-                        <div>
-                            <FChip v-bind:[item.statusColor]=true>{{ item.status }}</FChip>
-                            <div class="flex flex-nowrap text-secondary font-bold text-sm mt-1">{{ item.statusDate }}</div>
-                        </div>
-                    </template>
-                    <template #item-edit="{ item }">
-                        <div class="text-right pr-8">
-                            <FArrowButton secondary @click="openDialog(item)"/>
-                        </div>
-                    </template>
-                </FTable>
-                <FTable
-                    v-else-if="tab === 1"
-                    :headers="[
-                        { text: 'ID', field: 'id' },
-                        { text: 'Дата / Время', field: 'date' },
-                        { text: 'User_agent', field: 'userAgent' }
-                    ]"
-                    :items="[
-                        { id: 34234234234, date: '12.12.2023 23:45', userAgent: 'dsgsdsdgdsg' },
-                        { id: 34234234234, date: '12.12.2023 23:45', userAgent: 'dsgsdsdgdsg' },
-                        { id: 34234234234, date: '12.12.2023 23:45', userAgent: 'dsgsdsdgdsg' },
-                        { id: 34234234234, date: '12.12.2023 23:45', userAgent: 'dsgsdsdgdsg' },
-                        { id: 34234234234, date: '12.12.2023 23:45', userAgent: 'dsgsdsdgdsg' },
-                        { id: 34234234234, date: '12.12.2023 23:45', userAgent: 'dsgsdsdgdsg' },
-                        { id: 34234234234, date: '12.12.2023 23:45', userAgent: 'dsgsdsdgdsg' }
-                    ]"
-                >
-                </FTable>
+                <div v-if="tab === 0">
+                    <FTable  :headers="transactionsHeaders" :items="transactionsItems">
+                        <template #item-status="{ item }">
+                            <div>
+                                <FChip v-bind:[item.statusColor]=true>{{ item.status }}</FChip>
+                                <div class="mt-1 text-xs text-secondary font-bold flex flex-nowrap">{{ item.statusDate }}</div>
+                            </div>
+                        </template>
+                        <template #item-edit="{ item }">
+                            <div class="text-right pr-8">
+                                <FArrowButton secondary @click="openDialog(item)"/>
+                            </div>
+                        </template>
+                    </FTable>
+                    <FPagination :items-per-page="20" :length="780"/>
+                </div>
+                <div v-else-if="tab === 1">
+                    <FTable                       
+                        :headers="[
+                            { text: 'ID', field: 'id' },
+                            { text: 'Дата / Время', field: 'date' },
+                            { text: 'User_agent', field: 'userAgent' }
+                        ]"
+                        :items="[
+                            { id: 34234234234, date: '12.12.2023 23:45', userAgent: 'dsgsdsdgdsg' },
+                            { id: 34234234234, date: '12.12.2023 23:45', userAgent: 'dsgsdsdgdsg' },
+                            { id: 34234234234, date: '12.12.2023 23:45', userAgent: 'dsgsdsdgdsg' },
+                            { id: 34234234234, date: '12.12.2023 23:45', userAgent: 'dsgsdsdgdsg' },
+                            { id: 34234234234, date: '12.12.2023 23:45', userAgent: 'dsgsdsdgdsg' },
+                            { id: 34234234234, date: '12.12.2023 23:45', userAgent: 'dsgsdsdgdsg' },
+                            { id: 34234234234, date: '12.12.2023 23:45', userAgent: 'dsgsdsdgdsg' }
+                        ]"
+                    >
+                    </FTable>
+                    <FPagination :items-per-page="20" :length="780"/>
+                </div>
             </FCard>
 
             <FMessageBox
@@ -200,6 +205,7 @@ import FRadio from '../../components/kit/FRadio.vue';
 import FSelect from '../../components/kit/FSelect.vue';
 import FTextField from '../../components/kit/FTextField.vue';
 import FTextArea from '../../components/kit/FTextArea.vue';
+import FPagination from '../../components/kit/FPagination.vue';
 
 const correctCurrency = ref(null);
 const balanceCorrectMessageBoxVisible = ref(false);

@@ -1,5 +1,5 @@
 <template>
-    <div class="rounded-xl font-semibold bg-active flex flex-nowrap gap-x-1">
+    <div class="rounded-xl text-sm font-bold text-secondary bg-active flex flex-nowrap gap-x-1">
         <div
             v-for="(item, index) of items"
             :key="index"

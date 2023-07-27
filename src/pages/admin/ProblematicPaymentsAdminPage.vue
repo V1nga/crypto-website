@@ -43,7 +43,7 @@
                         placeholder="Метод оплаты"
                         class="flex-grow"
                     />
-                    <div class="flex-grow flex flex-nowrap items-center justify-end gap-x-2 text-dark font-semibold">
+                    <div class="text-sm text-dark font-semibold flex-grow flex flex-nowrap items-center justify-end gap-x-2">
                         Сумма от:
                         <FTextField :max-width="90" outlined placeholder="00"/>
                         до
@@ -78,7 +78,7 @@
                     <template #item-status="{ item }">
                         <div>
                             <FChip v-bind:[item.statusColor]=true>{{ item.status }}</FChip>
-                            <div class="flex flex-nowrap text-secondary font-bold text-sm mt-1">{{ item.statusDate }}</div>
+                            <div class="mt-1 text-xs text-secondary font-bold flex flex-nowrap">{{ item.statusDate }}</div>
                         </div>
                     </template>
                     <template #item-edit="{ item }">
@@ -106,6 +106,7 @@
                         <FDivider/>
                     </template>
                 </FTable>
+                <FPagination :items-per-page="20" :length="780"/>
             </FCard>
             <TransactionDialog
                 v-if="dialogData"
@@ -183,10 +184,10 @@
                         class="mt-2 px-4 py-2 flex flex-nowrap items-center"
                     >
                         <div class="whitespace-nowrap">
-                            <p class="font-bold">{{ attachment.fileName }}</p>
-                            <p class="font-semibold text-secondary">{{ attachment.fileSize }}</p>
+                            <p class="text-sm font-bold">{{ attachment.fileName }}</p>
+                            <p class="text-xs text-secondary font-semibold">{{ attachment.fileSize }}</p>
                         </div>
-                        <div class="flex justify-end w-full">
+                        <div class="flex-grow flex justify-end">
                             <button>
                                 <FIcon icon="rubbish"/>
                             </button>
@@ -213,6 +214,7 @@ import FTimePicker from '../../components/kit/FTimePicker.vue';
 import FDatePicker from '../../components/kit/FDatePicker.vue';
 import FDivider from '../../components/kit/FDivider.vue';
 import Filters from '../../components/layout/Filters.vue';
+import FPagination from '../../components/kit/FPagination.vue';
 
 const dialogData = ref(null);
 const dialogVisible = ref(false);

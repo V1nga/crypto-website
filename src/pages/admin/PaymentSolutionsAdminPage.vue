@@ -28,6 +28,7 @@
                         </div>
                     </template>
                 </FTable>
+                <FPagination :items-per-page="20" :length="780"/>
             </FCard>
             <FMessageBox
                 v-model="createPaymentSolutionMessageBoxVisible"
@@ -61,7 +62,7 @@
                 </div>
                 <div class="h-full p-6 bg-white">
                     <div class="flex flex-nowrap">
-                        <div class="font-bold">Список реквизитов</div>
+                        <div class="text-sm font-bold">Список реквизитов</div>
                         <div class="flex-grow flex justify-end">
                             <FButton base class="text-primary font-bold" @click="createRequisitesMessageBoxOpen">
                                 <FIcon icon="plus-primary" class="mr-2"/>
@@ -70,7 +71,7 @@
                         </div>
                     </div>
                     <div v-if="requisitesItems.length === 0" class="mt-16 flex flex-wrap justify-center gap-4">
-                        <div class="text-center text-secondary font-semibold">Список реквизитов пуст. Добавьте один или несколько реквизитов</div>
+                        <div class="text-sm text-center text-secondary font-semibold">Список реквизитов пуст. Добавьте один или несколько реквизитов</div>
                         <FButton @click="createRequisitesMessageBoxOpen">
                             <FIcon icon="plus" class="mr-3"/>
                             Добавить реквизиты
@@ -80,7 +81,7 @@
                         <div
                             v-for="(requisite, index) of requisitesItems"
                             :key="index"
-                            class="group/requisite-row mb-2 cursor-pointer hover:text-primary font-semibold flex flex-nowrap gap-x-3"
+                            class="group/requisite-row mb-2 cursor-pointer hover:text-primary text-sm font-semibold flex flex-nowrap gap-x-3"
                         >
                             {{ requisite.cardNumber }}
                             <FIcon :icon="requisite.cardIssuer"/>
@@ -132,6 +133,7 @@ import FDialog from '../../components/kit/FDialog.vue';
 import FRadio from '../../components/kit/FRadio.vue';
 import FTextArea from '../../components/kit/FTextArea.vue';
 import FNumber from '../../components/kit/FNumber.vue';
+import FPagination from '../../components/kit/FPagination.vue';
 
 const createPaymentSolutionMessageBoxVisible = ref(false);
 const createPaymentSolutionMessageBoxOpen = () => {

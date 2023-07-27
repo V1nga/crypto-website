@@ -76,7 +76,7 @@ const props = defineProps({
     },
     textSize: {
       type: String,
-      default: 'md'
+      default: 'sm'
     },
     fontSize: {
       type: String,

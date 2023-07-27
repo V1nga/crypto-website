@@ -63,6 +63,9 @@ const onClickClose = () => {
     box-shadow: -10px 4px 24px 0px #00000026;
     z-index: 100;
 }
+.f-dialog::-webkit-scrollbar {
+    width: 0;
+}
 
 .f-dialog-close-btn {
     position: absolute;
