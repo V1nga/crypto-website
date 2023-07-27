@@ -5,6 +5,9 @@
                 <div class="flex flex-nowrap items-center">
                     <FArrowButton reverse active class="my-1 mr-5" @click="$router.push('/admin/cards')"/>
                     <div class="font-bold">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+                    <div class="flex-grow flex justify-end">
+                        <FCheckBox>Активный</FCheckBox>
+                    </div>
                 </div>
                 <div class="flex flex-wrap gap-4">
                     <div class="flex-grow">
@@ -52,6 +55,7 @@ import FDatePicker from '../../components/kit/FDatePicker.vue';
 import FTimePicker from '../../components/kit/FTimePicker.vue';
 import FCard from '../../components/kit/FCard.vue';
 import FIcon from '../../components/kit/FIcon.vue';
+import FCheckBox from '../../components/kit/FCheckBox.vue';
 
 const items = ref([
     { id: 8728, date: '16:00 6/07/2023', text: '8728 На ваш баланс сотового телефона 7ххххх98 зачислен платеж 100р' },

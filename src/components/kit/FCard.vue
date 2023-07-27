@@ -40,6 +40,6 @@ const cardClasses = computed(() => [
     `bg-${ props.color }`,
     `rounded-${ props.rounded}`,
     props.noPaddings ? '' : 'p-4',
-    props.noShadowsMobile ? 'drop-shadow-none sm:drop-shadow-xl' : 'drop-shadow-xl'
+    props.noShadowsMobile ? 'drop-shadow-none sm:drop-shadow' : 'drop-shadow'
 ]);
 </script>
