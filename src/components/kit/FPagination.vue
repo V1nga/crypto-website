@@ -1,18 +1,20 @@
 <template>
-    <div class="px-12 py-4 flex flex-nowrap items-center gap-3">
-        <span class="text-sm font-semibold">Показано</span>
-        <FSelect
-            v-model="_itemsPerPage"
-            :width="90"
-            :items="[
-                { text: '10', value: 10 },
-                { text: '20', value: 20 },
-                { text: '30', value: 30 }
-            ]"
-            mandatory
-        />
-        <span class="text-sm font-semibold">из {{ length }}</span>
-        <div class="flex-grow flex flex-nowrap justify-end items-center gap-2">
+    <div class="px-12 py-4 flex flex-wrap lg:flex-nowrap justify-center lg:justify-start items-center gap-3">
+        <div class="flex flex-nowrap items-center gap-3">
+            <span class="text-sm font-semibold">Показано</span>
+            <FSelect
+                v-model="_itemsPerPage"
+                :width="90"
+                :items="[
+                    { text: '10', value: 10 },
+                    { text: '20', value: 20 },
+                    { text: '30', value: 30 }
+                ]"
+                mandatory
+            />
+            <span class="text-sm font-semibold">из {{ length }}</span>
+        </div>
+        <div class="flex-grow flex flex-nowrap justify-center lg:justify-end items-center gap-2">
             <FArrowButton
                 :disabled="value === 1"
                 secondary

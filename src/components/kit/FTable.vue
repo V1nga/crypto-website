@@ -11,7 +11,7 @@
                 </thead>
                 <tbody>
                     <tr v-for="(item, index) of items" :key="index" class="border-b border-primary-light">
-                        <td v-for="(header, index) of headers" :key="index" class="whitespace-nowrap px-6 py-2 text-sm font-semibold">
+                        <td v-for="(header, index) of headers" :key="index" class="whitespace-nowrap px-6 py-3 text-sm font-semibold">
                             <slot :name="`item-${ header.field }`" :item="item">
                                 {{ item[header.field] }}
                             </slot>

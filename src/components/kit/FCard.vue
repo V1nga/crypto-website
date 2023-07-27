@@ -7,7 +7,7 @@
         :max-width="maxWidth"
         :max-height="maxHeight"
         
-        class="filter"
+        class="f-card drop-shadow-none"
         :class="cardClasses"
     >
         <slot/>
@@ -40,6 +40,11 @@ const cardClasses = computed(() => [
     `bg-${ props.color }`,
     `rounded-${ props.rounded}`,
     props.noPaddings ? '' : 'p-4',
-    props.noShadowsMobile ? 'drop-shadow-none sm:drop-shadow' : 'drop-shadow'
+    props.noShadowsMobile ? 'sm:drop-shadow-md' : 'drop-shadow-none f-card-shadow'
 ]);
 </script>
+<style scoped>
+.f-card-shadow { 
+    box-shadow: 0px 2px 8px 0px #14172514;
+}
+</style>
