@@ -5,19 +5,7 @@ export default {
   safelist: [
     'w-full',
     {
-      pattern: /(bg|text)-(\w)/
-    },
-    {
-      pattern: /(bg|text)-(\w)-(\w)/
-    },
-    {
-      pattern: /(bg|text)-(\w)-(\w)-(\n)/
-    },
-    {
-      pattern: /place-content-(\w)/
-    },
-    {
-      pattern: /rounded-(\w)/
+      pattern: /(bg|text|place-content|rounded)-.+/
     }
   ],
   theme: {
