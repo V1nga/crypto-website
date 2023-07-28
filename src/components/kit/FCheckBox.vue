@@ -14,8 +14,10 @@
                 :class="[
                     'bg-white',
                     `bg-${ disabled ? '[#D3DAE6]' : 'white' }`,
-                    `${ value ? 'right' : 'left' }-[3px]`,
                     { 'filter drop-shadow-sm': !value && !disabled }
+                ]"
+                :style="[
+                    `${ value ? 'right' : 'left' }: 3px;`,
                 ]"
             />
         </div>
